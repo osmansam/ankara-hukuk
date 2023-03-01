@@ -4,23 +4,34 @@ import FormRowSelect from "../components/FormRowSelect";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { createBar } from "../features/bar/barSlice";
 import styled from "styled-components";
 
 const AddBar = () => {
+  const { bar, isLoading } = useSelector((store) => store.bar);
+  const dispatch = useDispatch();
   const [values, setValues] = useState({
-    type: "",
+    type: "About Us",
     categoryTr: "",
     categoryEn: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { type, categoryTr, categoryEn } = values;
+    if (!type || !categoryTr || !categoryEn) {
+      toast.error("Please fill out all fields");
+      return;
+    }
+    dispatch(createBar({ type, categoryTr, categoryEn }));
+    setValues({ type: "About Us", categoryTr: "", categoryEn: "" });
   };
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setValues({ ...values, [name]: value });
   };
+
   return (
     <Wrapper className="full-page">
       <form onSubmit={handleSubmit}>
@@ -31,24 +42,24 @@ const AddBar = () => {
           handleChange={handleChange}
           list={["About Us", "Work", "Our Team"]}
         />
+        <FormRow
+          type="text"
+          name="categoryTr"
+          value={values.categoryTr}
+          handleChange={handleChange}
+          labelText="Category (Turkish)"
+        />
+        <FormRow
+          type="text"
+          name="categoryEn"
+          value={values.categoryEn}
+          handleChange={handleChange}
+          labelText="Category (English)"
+        />
+        <button type="submit" className="btn btn-block" disabled={isLoading}>
+          Submit
+        </button>
       </form>
-      <FormRow
-        type="text"
-        name="categoryTr"
-        value={values.categoryTr}
-        handleChange={handleChange}
-        labelText="Category (Turkish)"
-      />
-      <FormRow
-        type="text"
-        name="categoryEn"
-        value={values.categoryEn}
-        handleChange={handleChange}
-        labelText="Category (English)"
-      />
-      <button type="submit" className="btn btn-block">
-        Submit
-      </button>
     </Wrapper>
   );
 };

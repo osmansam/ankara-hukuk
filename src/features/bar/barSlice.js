@@ -5,6 +5,7 @@ const initialState = {
   type: "",
   categoryTr: "",
   categoryEn: "",
+  isLoading: false,
 };
 
 export const createBar = createAsyncThunk(
@@ -34,5 +35,5 @@ const barSlice = createSlice({
   },
 });
 
-export const { addBar } = barSlice.actions;
+export const {} = barSlice.actions;
 export default barSlice.reducer;
