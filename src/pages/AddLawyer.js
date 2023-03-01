@@ -3,6 +3,7 @@ import axios from "axios";
 import FormRow from "../components/FormRow";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   clearForm,
   handleChange,
@@ -14,6 +15,7 @@ import styled from "styled-components";
 
 const AddLawyer = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [photo, setPhoto] = useState(null);
   const [isImage, setIsImage] = useState(false);
   const {
@@ -70,6 +72,9 @@ const AddLawyer = () => {
           expertiseEn,
         })
       );
+      dispatch(clearForm());
+      setIsImage(false);
+      history.push("/");
     } else {
       dispatch(setLoading(true));
       const formData = new FormData();
