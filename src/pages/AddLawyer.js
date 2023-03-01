@@ -8,6 +8,7 @@ import {
   handleChange,
   setImage,
   setLoading,
+  createLawyer,
 } from "../features/lawyer/lawyerSlice";
 import styled from "styled-components";
 
@@ -35,6 +36,40 @@ const AddLawyer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isImage) {
+      if (
+        !name ||
+        !email ||
+        !dutyTr ||
+        !dutyEn ||
+        !educationTr ||
+        !educationEn ||
+        !barAssociationTr ||
+        !barAssociationEn ||
+        !languagesTr ||
+        !languagesEn ||
+        !expertiseTr ||
+        !expertiseEn
+      ) {
+        toast.error("Please fill out all fields");
+        return;
+      }
+      dispatch(
+        createLawyer({
+          name,
+          email,
+          image,
+          dutyTr,
+          dutyEn,
+          educationTr,
+          educationEn,
+          barAssociationTr,
+          barAssociationEn,
+          languagesTr,
+          languagesEn,
+          expertiseTr,
+          expertiseEn,
+        })
+      );
     } else {
       dispatch(setLoading(true));
       const formData = new FormData();
