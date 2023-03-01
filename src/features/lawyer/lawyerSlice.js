@@ -29,7 +29,20 @@ export const createLawyer = createAsyncThunk(
 const lawyerSlice = createSlice({
   name: "lawyer",
   initialState,
-  reducers: {},
+  reducers: {
+    handleChange: (state, { payload: { name, value } }) => {
+      state[name] = value;
+    },
+    clearForm: (state) => {
+      return initialState;
+    },
+    setImage: (state, { payload }) => {
+      state.image = payload;
+    },
+    setLoading: (state, { payload }) => {
+      state.isLoading = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createLawyer.pending, (state) => {
@@ -46,5 +59,6 @@ const lawyerSlice = createSlice({
   },
 });
 
-export const {} = lawyerSlice.actions;
+export const { handleChange, clearForm, setImage, setLoading } =
+  lawyerSlice.actions;
 export default lawyerSlice.reducer;
