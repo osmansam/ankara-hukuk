@@ -8,7 +8,7 @@ export const registerUserThunk = async (url, user, thunkAPI) => {
     const resp = await axios.post(`${baseURL}/${url}`, user);
     return resp.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return checkForUnauthorizedResponse(error, thunkAPI);
   }
 };
 //Login User
@@ -17,6 +17,6 @@ export const loginUserThunk = async (url, user, thunkAPI) => {
     const resp = await axios.post(`${baseURL}/${url}`, user);
     return resp.data;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.response.data.msg);
+    return checkForUnauthorizedResponse(error, thunkAPI);
   }
 };
