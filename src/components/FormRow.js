@@ -22,6 +22,7 @@ const FormRow = ({ type, name, value, handleChange, labelText }) => {
 const Wrapper = styled.div`
   .form-row {
     margin-bottom: 1rem;
+    width: 40vh;
   }
   .form-label {
     display: block;

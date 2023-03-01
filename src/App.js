@@ -1,8 +1,22 @@
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
-    <div className="App">
-      <h1>React App</h1>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/register" exact>
+          <Register />
+        </Route>
+      </Switch>
+      <ToastContainer position="top-center" />
+    </Router>
   );
 }
 

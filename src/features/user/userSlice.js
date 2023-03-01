@@ -38,38 +38,36 @@ const userSlice = createSlice({
       }
     },
   },
-  extraReducers(builder) {
-    builder.addCase(registerUser.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(registerUser.fulfilled, (state, action) => {
-      const { user } = action.payload;
-      state.isLoading = false;
-      state.user = user;
-      addUserToLocalStorage(user);
-      toast.success(`Hello There ${user.name}`);
-    });
-    builder.addCase(registerUser.rejected, (state, action) => {
-      state.isLoading = false;
-      toast.error(action.payload);
-    });
+  extraReducers: (builder) => {
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        toast.success("User Registered Successfully");
+      })
 
-    builder.addCasse(loginUser.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      const { user } = action.payload;
-      state.isLoading = false;
-      state.user = user;
-      addUserToLocalStorage(user);
-      toast.success(`Hello There ${user.name}`);
-    });
-    builder.addCase(loginUser.rejected, (state, action) => {
-      state.isLoading = false;
-      toast.error(action.payload);
-    });
+      .addCase(registerUser.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        const { user } = action.payload;
+        state.isLoading = false;
+        state.user = user;
+        addUserToLocalStorage(user);
+        toast.success(`Hello There ${user.name}`);
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
+      });
   },
 });
 
-export const {} = userSlice.actions;
+export const { logoutUser } = userSlice.actions;
 export default userSlice.reducer;
