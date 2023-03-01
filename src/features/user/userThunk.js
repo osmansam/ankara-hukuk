@@ -1,16 +1,22 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
+import { checkForUnauthorizedResponse } from "../../utils/axios";
+import axios from "axios";
 
-const initialState = {
-  user: null,
-  isLoading: false,
+const baseURL = "/api/v1";
+//Register User
+export const registerUserThunk = async (url, user, thunkAPI) => {
+  try {
+    const resp = await axios.post(`${baseURL}/${url}`, user);
+    return resp.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
 };
-
-const userSlice = createSlice({
-  name: "user",
-  initialState,
-  reducers: {},
-});
-
-export const {} = userSlice.actions;
-export default userSlice.reducer;
+//Login User
+export const loginUserThunk = async (url, user, thunkAPI) => {
+  try {
+    const resp = await axios.post(`${baseURL}/${url}`, user);
+    return resp.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response.data.msg);
+  }
+};
