@@ -1,9 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setActiveTab } from "../../features/bar/barSlice";
 import styled from "styled-components";
 
 const Teambar = ({ props }) => {
+  const dispatch = useDispatch();
   const { activeTab, language } = useSelector((state) => state.bar);
 
   const height = React.useRef("");
@@ -11,7 +12,7 @@ const Teambar = ({ props }) => {
     if (height.current) {
       height.current.style.height = `${props.length * 25 + 50}px`;
     }
-    setActiveTab(props[0]._id);
+    dispatch(setActiveTab(props[0]._id));
   }, []);
 
   return (
@@ -27,7 +28,7 @@ const Teambar = ({ props }) => {
                   activeTab === _id ? "active-bar" : ""
                 }`}
                 onClick={() => {
-                  setActiveTab(_id);
+                  dispatch(setActiveTab(_id));
                 }}
               >
                 {language === "tr" ? categoryTr : categoryEn}
