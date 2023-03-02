@@ -17,17 +17,20 @@ const About = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  // fetching the infos and bars from the database when the page first opened
   useEffect(() => {
     const type = "About Us";
     dispatch(getBars(type));
     dispatch(getInfos(type));
   }, [dispatch]);
+
+  //whenever the page opens and bars loaded we set the teambar-activebar to the first item
   useEffect(() => {
     if (bars.length > 0) {
       dispatch(setActiveTab(bars[0].categoryTr));
     }
   }, [bars]);
+  //we take the correct item from the infos
   useEffect(() => {
     setAboutItem(infos?.find((item) => item.headerTr === activeTab));
   }, [activeTab]);
