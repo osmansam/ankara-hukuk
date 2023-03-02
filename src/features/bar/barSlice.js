@@ -35,6 +35,9 @@ const barSlice = createSlice({
     closeSideBar: (state) => {
       state.isSideBar = false;
     },
+    openSideBar: (state) => {
+      state.isSideBar = true;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -52,6 +55,11 @@ const barSlice = createSlice({
   },
 });
 
-export const { setActiveTab, setLanguage, setActiveNav, closeSideBar } =
-  barSlice.actions;
+export const {
+  setActiveTab,
+  setLanguage,
+  setActiveNav,
+  closeSideBar,
+  openSideBar,
+} = barSlice.actions;
 export default barSlice.reducer;

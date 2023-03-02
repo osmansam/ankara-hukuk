@@ -86,8 +86,8 @@ const AddInfo = () => {
   );
 };
 const Wrapper = styled.div`
-  width: 40vh;
+  width: fit-content;
   height: 100vh;
-  margin: 10rem auto;
+  margin: 5rem auto;
 `;
 export default AddInfo;

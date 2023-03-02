@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setLanguage } from "../../features/bar/barSlice";
+import { setLanguage } from "../features/bar/barSlice";
 import styled from "styled-components";
 
 const Languages = () => {
@@ -50,7 +50,7 @@ const Wrapper = styled.div`
     height: fit-content;
   }
   .languages li {
-    transition: var(--mainTransition);
+    transition: all 0.3s linear;
   }
 
   .languages li:hover {
@@ -62,6 +62,11 @@ const Wrapper = styled.div`
     background-color: black;
     color: white;
     border-radius: 0.2em;
+  }
+  @media screen and (max-width: 801px) {
+    .language-options {
+      width: 25%;
+    }
   }
 `;
 export default Languages;
