@@ -6,20 +6,20 @@ import { getBars, setActiveTab } from "../features/bar/barSlice";
 import { getInfos } from "../features/info/infoSlice";
 import styled from "styled-components";
 
-const Works = () => {
+const About = () => {
   const dispatch = useDispatch();
   const { bars } = useSelector((store) => store.bar);
   const { infos } = useSelector((store) => store.info);
   const { language, activeTab } = useSelector((store) => store.bar);
 
-  const [workItem, setWorkItem] = useState(null);
+  const [aboutItem, setAboutItem] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    const type = "Work";
+    const type = "About Us";
     dispatch(getBars(type));
     dispatch(getInfos(type));
   }, [dispatch]);
@@ -29,24 +29,26 @@ const Works = () => {
     }
   }, [bars]);
   useEffect(() => {
-    setWorkItem(infos?.find((item) => item.headerTr === activeTab));
+    setAboutItem(infos?.find((item) => item.headerTr === activeTab));
   }, [activeTab]);
 
   return (
     <Wrapper>
-      <Section props="works" />
+      <Section props="about" />
       <div className="team">
         <div className="gridItem1">
           <Teambar props={bars} />
         </div>
-        {workItem && (
-          <div className="works-info-center gridItem2">
-            <h3>{language === "tr" ? workItem.headerTr : workItem.headerEn}</h3>
+        {aboutItem && (
+          <div className="about-info-center gridItem2">
+            <h3>
+              {language === "tr" ? aboutItem.headerTr : aboutItem.headerEn}
+            </h3>
             {language === "tr"
-              ? workItem.infoTr
+              ? aboutItem.infoTr
                   .split("\n")
                   .map((p, index) => <p key={index}>{p}</p>)
-              : workItem.infoEn
+              : aboutItem.infoEn
                   .split("\n")
                   .map((p, index) => <p key={index}>{p}</p>)}
           </div>
@@ -89,14 +91,14 @@ const Wrapper = styled.main`
       flex-flow: row wrap;
     }
   }
-  .works-info-center {
+  .about-info-center {
     width: 60%;
     margin-top: 2em;
   }
-  .works-info-center p {
+  .about-info-center p {
     text-indent: 1em;
     margin: 2em 1em;
     font-size: 0.9em;
   }
 `;
-export default Works;
+export default About;
