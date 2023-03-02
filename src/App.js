@@ -7,6 +7,7 @@ import AddLink from "./pages/AddLink";
 import Home from "./pages/Home";
 import Works from "./pages/Works";
 import About from "./pages/About";
+import HumanResources from "./pages/HumanResources";
 import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -42,6 +43,9 @@ function App() {
         </Route>
         <Route path="/works" exact>
           <Works />
+        </Route>
+        <Route path="/humanresources" exact>
+          <HumanResources />
         </Route>
       </Switch>
       <ToastContainer position="top-center" />
