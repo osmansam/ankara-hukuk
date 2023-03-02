@@ -7,6 +7,9 @@ const initialState = {
   categoryEn: "",
   isLoading: false,
   activeTab: "1",
+  language: "tr",
+  isSideBar: false,
+  activeNav: "",
 };
 
 export const createBar = createAsyncThunk(
@@ -22,6 +25,15 @@ const barSlice = createSlice({
   reducers: {
     setActiveTab: (state, { payload }) => {
       state.activeTab = payload;
+    },
+    setLanguage: (state, { payload }) => {
+      state.language = payload;
+    },
+    setActiveNav: (state, { payload }) => {
+      state.activeNav = payload;
+    },
+    closeSideBar: (state) => {
+      state.isSideBar = false;
     },
   },
   extraReducers: (builder) => {
@@ -40,5 +52,6 @@ const barSlice = createSlice({
   },
 });
 
-export const { setActiveTab } = barSlice.actions;
+export const { setActiveTab, setLanguage, setActiveNav, closeSideBar } =
+  barSlice.actions;
 export default barSlice.reducer;
