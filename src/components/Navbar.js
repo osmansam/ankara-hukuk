@@ -5,19 +5,22 @@ import { FaBars } from "react-icons/fa";
 import Languages from "../components/Languages";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { getLinks } from "../features/link/linkSlice";
+import { setLinks } from "../features/link/linkSlice";
+import { setActiveNav, openSideBar } from "../features/bar/barSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { language, activeNav, setActiveNav, openSideBar } = useSelector(
-    (store) => store.bar
-  );
-
+  const { language, activeNav } = useSelector((store) => store.bar);
   const { links } = useSelector((store) => store.link);
+  const getLinks = async () => {
+    const response = await fetch("api/v1/links");
+    const data = await response.json();
+    dispatch(setLinks(data.links));
+  };
   useEffect(() => {
-    dispatch(getLinks());
-  }, [dispatch]);
-  console.log(links, "links");
+    getLinks();
+  }, []);
+
   return (
     <Wrapper>
       <nav className="navbar">
