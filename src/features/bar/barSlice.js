@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { createBarThunk } from "./barThunk";
+import axios from "axios";
 const initialState = {
   type: "",
   categoryTr: "",
@@ -10,6 +11,7 @@ const initialState = {
   language: "tr",
   isSideBar: false,
   activeNav: "",
+  bars: [],
 };
 
 export const createBar = createAsyncThunk(
@@ -18,7 +20,18 @@ export const createBar = createAsyncThunk(
     createBarThunk("bars/create", bar, thunkAPI);
   }
 );
-
+//get bars by type
+export const getBars = createAsyncThunk(
+  "bar/getBars",
+  async (type, thunkAPI) => {
+    try {
+      const resp = await axios.post(`api/v1/bars/`, { type });
+      return resp.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 const barSlice = createSlice({
   name: "bar",
   initialState,
@@ -35,6 +48,9 @@ const barSlice = createSlice({
     closeSideBar: (state) => {
       state.isSideBar = false;
     },
+    openSideBar: (state) => {
+      state.isSideBar = true;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -48,10 +64,27 @@ const barSlice = createSlice({
       .addCase(createBar.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload);
+      })
+
+      .addCase(getBars.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getBars.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.bars = payload.bar;
+      })
+      .addCase(getBars.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
       });
   },
 });
 
-export const { setActiveTab, setLanguage, setActiveNav, closeSideBar } =
-  barSlice.actions;
+export const {
+  setActiveTab,
+  setLanguage,
+  setActiveNav,
+  closeSideBar,
+  openSideBar,
+} = barSlice.actions;
 export default barSlice.reducer;

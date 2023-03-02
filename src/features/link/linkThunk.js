@@ -12,13 +12,3 @@ export const createLinkThunk = async (url, link, thunkAPI) => {
     return checkForUnauthorizedResponse(error, thunkAPI);
   }
 };
-
-//Get Links
-export const getLinksThunk = async (url, thunkAPI) => {
-  try {
-    const resp = await axios.get(`${baseURL}/${url}`);
-    return resp.data;
-  } catch (error) {
-    return checkForUnauthorizedResponse(error, thunkAPI);
-  }
-};

@@ -1,10 +1,10 @@
 import React from "react";
 
-const Home = () => {
+const Error = () => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  return <h1>home</h1>;
+  return <h1>Error</h1>;
 };
 
-export default Home;
+export default Error;

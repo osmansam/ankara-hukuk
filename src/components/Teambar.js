@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveTab } from "../../features/bar/barSlice";
+import { setActiveTab } from "../features/bar/barSlice";
 import styled from "styled-components";
 
 const Teambar = ({ props }) => {
@@ -9,10 +9,12 @@ const Teambar = ({ props }) => {
 
   const height = React.useRef("");
   React.useEffect(() => {
-    if (height.current) {
-      height.current.style.height = `${props.length * 25 + 50}px`;
+    if (props.length > 0) {
+      if (height.current) {
+        height.current.style.height = `${props.length * 25 + 50}px`;
+      }
+      dispatch(setActiveTab(props[0].categoryTr));
     }
-    dispatch(setActiveTab(props[0]._id));
   }, []);
 
   return (
@@ -25,10 +27,10 @@ const Teambar = ({ props }) => {
               <li
                 key={index}
                 className={`teambar-tab ${
-                  activeTab === _id ? "active-bar" : ""
+                  activeTab === categoryTr ? "active-bar" : ""
                 }`}
                 onClick={() => {
-                  dispatch(setActiveTab(_id));
+                  dispatch(setActiveTab(categoryTr));
                 }}
               >
                 {language === "tr" ? categoryTr : categoryEn}
@@ -64,13 +66,20 @@ const Wrapper = styled.div`
     display: flex;
     font-size: 0.8rem;
     justify-content: space-between;
-    padding-left: 3.5em;
+    align-items: center;
+    padding: 0 1em;
     cursor: pointer;
   }
   .teambar-tab:hover {
     display: flex;
     color: red;
     text-align: center;
+  }
+  .active-bar {
+    color: white !important;
+    background-color: #9f000f;
+    border-radius: 0.5em;
+    width: 80%;
   }
 `;
 

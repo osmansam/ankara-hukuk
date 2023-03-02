@@ -5,12 +5,15 @@ import AddInfo from "./pages/AddInfo";
 import AddLawyer from "./pages/AddLawyer";
 import AddLink from "./pages/AddLink";
 import Home from "./pages/Home";
+import Works from "./pages/Works";
+import Navbar from "./components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Switch>
         <Route path="/" exact>
           <Home />
@@ -29,6 +32,9 @@ function App() {
         </Route>
         <Route path="/add-link" exact>
           <AddLink />
+        </Route>
+        <Route path="/works" exact>
+          <Works />
         </Route>
       </Switch>
       <ToastContainer position="top-center" />

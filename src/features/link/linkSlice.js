@@ -17,10 +17,6 @@ export const createLink = createAsyncThunk(
     createLinkThunk("links/", link, thunkAPI);
   }
 );
-// get links
-export const getLinks = createAsyncThunk("link/getLinks", async (thunkAPI) => {
-  getLinksThunk("links/", thunkAPI);
-});
 
 const linkSlice = createSlice({
   name: "link",
@@ -37,6 +33,9 @@ const linkSlice = createSlice({
     },
     setLoading: (state, { payload }) => {
       state.isLoading = payload;
+    },
+    setLinks: (state, { payload }) => {
+      state.links = payload;
     },
   },
   extraReducers: (builder) => {
@@ -55,6 +54,6 @@ const linkSlice = createSlice({
   },
 });
 
-export const { handleChange, clearForm, setLoading, setImage } =
+export const { handleChange, clearForm, setLoading, setImage, setLinks } =
   linkSlice.actions;
 export default linkSlice.reducer;
