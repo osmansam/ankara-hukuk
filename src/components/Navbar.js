@@ -12,11 +12,24 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const { language, activeNav } = useSelector((store) => store.bar);
   const { links } = useSelector((store) => store.link);
+
+  useEffect(() => {
+    const storedActiveNav = localStorage.getItem("activeNav");
+    if (storedActiveNav) {
+      dispatch(setActiveNav(storedActiveNav));
+    }
+  }, []);
+
   const getLinks = async () => {
     const response = await fetch("api/v1/links");
     const data = await response.json();
     dispatch(setLinks(data.links));
   };
+
+  useEffect(() => {
+    localStorage.setItem("activeNav", activeNav);
+  }, [activeNav]);
+
   useEffect(() => {
     getLinks();
   }, []);
@@ -37,14 +50,14 @@ const Navbar = () => {
         <div className="nav-center">
           <ul className="nav-links">
             {links?.map((item, index) => {
-              const { en, tr, link } = item;
+              const { _id, en, tr, link } = item;
               return (
                 <li key={index}>
                   <Link
-                    className={`${activeNav === en ? "active-bar" : ""}`}
+                    className={`${activeNav === _id ? "active-bar" : ""}`}
                     to={link}
                     onClick={() => {
-                      dispatch(setActiveNav(en));
+                      dispatch(setActiveNav(_id));
                     }}
                   >
                     {language === "tr" ? tr : en}

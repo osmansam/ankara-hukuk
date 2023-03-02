@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import Section from "../components/Section";
 import Teambar from "../components/Teambar";
 import { useSelector, useDispatch } from "react-redux";
-import { getBars } from "../features/bar/barSlice";
+import { getBars, setActiveTab } from "../features/bar/barSlice";
 import { getInfos } from "../features/info/infoSlice";
 import styled from "styled-components";
 
@@ -23,7 +23,11 @@ const Works = () => {
     dispatch(getBars(type));
     dispatch(getInfos(type));
   }, [dispatch]);
-
+  useEffect(() => {
+    if (bars.length > 0) {
+      dispatch(setActiveTab(bars[0]._id));
+    }
+  }, [bars]);
   // useEffect(() => {
   //   setWorkItem(infos?.find((item) => item._id === activeTab));
   // }, [activeTab]);
