@@ -120,5 +120,9 @@ const AddLink = () => {
     </Wrapper>
   );
 };
-const Wrapper = styled.section``;
+const Wrapper = styled.section`
+  width: 40vh;
+  height: 200vh;
+  margin: 10rem auto;
+`;
 export default AddLink;
