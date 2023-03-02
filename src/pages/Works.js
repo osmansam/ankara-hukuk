@@ -61,24 +61,24 @@ const Wrapper = styled.main`
   width: 100%; */
   .team {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 0.5fr 100%;
     margin-left: 2em;
     justify-content: center;
     align-content: center;
-    width: 80%
-    margin: 4em auto;
+    column-gap: 2em;
+    width: 100%;
+    margin-top: 4em;
     height: 100%;
-    border: 2px dashed rgba(114, 186, 94, 0.35);
   }
   .gridItem1 {
-    border: 2px solid red;
     box-sizing: border-box;
     padding: 1rem;
+    margin-left: 20em;
   }
   .gridItem2 {
-    border: 2px solid blue;
     box-sizing: border-box;
     padding: 1rem;
+    margin-left: 6em;
   }
   @media screen and (max-width: 801px) {
     .team {
