@@ -24,6 +24,15 @@ const linkSlice = createSlice({
     handleChange: (state, { payload: { name, value } }) => {
       state[name] = value;
     },
+    clearForm: (state) => {
+      return initialState;
+    },
+    setImage: (state, { payload }) => {
+      state.image = payload;
+    },
+    setLoading: (state, { payload }) => {
+      state.isLoading = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -41,5 +50,6 @@ const linkSlice = createSlice({
   },
 });
 
-export const { handleChange } = linkSlice.actions;
+export const { handleChange, clearForm, setLoading, setImage } =
+  linkSlice.actions;
 export default linkSlice.reducer;
