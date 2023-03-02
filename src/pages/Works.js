@@ -25,26 +25,28 @@ const Works = () => {
   }, [dispatch]);
   useEffect(() => {
     if (bars.length > 0) {
-      dispatch(setActiveTab(bars[0]._id));
+      dispatch(setActiveTab(bars[0].categoryTr));
     }
   }, [bars]);
-  // useEffect(() => {
-  //   setWorkItem(infos?.find((item) => item._id === activeTab));
-  // }, [activeTab]);
+  useEffect(() => {
+    setWorkItem(infos?.find((item) => item.headerTr === activeTab));
+  }, [activeTab]);
 
   return (
     <Wrapper>
       <Section props="works" />
       <div className="team">
-        <Teambar props={bars} />
-        {/* {workItem && (
-          <div className="works-info-center">
+        <div className="gridItem1">
+          <Teambar props={bars} />
+        </div>
+        {workItem && (
+          <div className="works-info-center gridItem2">
             <h3>{language === "tr" ? workItem.headerTr : workItem.headerEn}</h3>
             {language === "tr"
               ? workItem.infoTr.split("\n").map((p) => <p>{p}</p>)
               : workItem.infoEn.split("\n").map((p) => <p>{p}</p>)}
           </div>
-        )} */}
+        )}
       </div>
     </Wrapper>
   );
@@ -58,13 +60,25 @@ const Wrapper = styled.main`
   min-width: 800px;
   width: 100%; */
   .team {
-    display: flex;
-    flex-wrap: row wrap;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin-left: 2em;
+    justify-content: center;
     align-content: center;
-    width: 100%;
-    margin-top: 4em;
+    width: 80%
+    margin: 4em auto;
     height: 100%;
+    border: 2px dashed rgba(114, 186, 94, 0.35);
+  }
+  .gridItem1 {
+    border: 2px solid red;
+    box-sizing: border-box;
+    padding: 1rem;
+  }
+  .gridItem2 {
+    border: 2px solid blue;
+    box-sizing: border-box;
+    padding: 1rem;
   }
   @media screen and (max-width: 801px) {
     .team {

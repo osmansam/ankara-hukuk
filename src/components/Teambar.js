@@ -13,7 +13,7 @@ const Teambar = ({ props }) => {
       if (height.current) {
         height.current.style.height = `${props.length * 25 + 50}px`;
       }
-      dispatch(setActiveTab(props[0]._id));
+      dispatch(setActiveTab(props[0].categoryTr));
     }
   }, []);
 
@@ -27,10 +27,10 @@ const Teambar = ({ props }) => {
               <li
                 key={index}
                 className={`teambar-tab ${
-                  activeTab === _id ? "active-bar" : ""
+                  activeTab === categoryTr ? "active-bar" : ""
                 }`}
                 onClick={() => {
-                  dispatch(setActiveTab(_id));
+                  dispatch(setActiveTab(categoryTr));
                 }}
               >
                 {language === "tr" ? categoryTr : categoryEn}
