@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createLinkThunk } from "./linkThunk";
+import { createLinkThunk, getLinksThunk } from "./linkThunk";
 
 const initialState = {
   en: "",
@@ -8,14 +8,19 @@ const initialState = {
   isLoading: false,
   image: "",
   link: "",
+  links: [],
 };
-
+// create link
 export const createLink = createAsyncThunk(
   "link/createLink",
   async (link, thunkAPI) => {
     createLinkThunk("links/", link, thunkAPI);
   }
 );
+// get links
+export const getLinks = createAsyncThunk("link/getLinks", async (thunkAPI) => {
+  getLinksThunk("links/", thunkAPI);
+});
 
 const linkSlice = createSlice({
   name: "link",
