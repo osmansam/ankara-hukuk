@@ -66,13 +66,20 @@ const Wrapper = styled.div`
     display: flex;
     font-size: 0.8rem;
     justify-content: space-between;
-    padding-left: 3.5em;
+    align-items: center;
+    padding: 0 1em;
     cursor: pointer;
   }
   .teambar-tab:hover {
     display: flex;
     color: red;
     text-align: center;
+  }
+  .active-bar {
+    color: white !important;
+    background-color: #9f000f;
+    border-radius: 0.5em;
+    width: 80%;
   }
 `;
 
