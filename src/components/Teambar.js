@@ -15,7 +15,7 @@ const Teambar = ({ props }) => {
       }
       dispatch(setActiveTab(props[0].categoryTr));
     }
-  }, []);
+  }, [props]);
 
   return (
     <Wrapper>
