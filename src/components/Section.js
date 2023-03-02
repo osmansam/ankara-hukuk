@@ -5,7 +5,7 @@ import styled from "styled-components";
 const Section = ({ props }) => {
   const { language } = useSelector((state) => state.bar);
   const { links } = useSelector((state) => state.link);
-  const { image, en, tr } = links.find((item) => item.en === props);
+  const { image, en, tr } = links?.find((item) => item.en === props);
   return (
     <Wrapper>
       <section className={`section ${props}-section`}>

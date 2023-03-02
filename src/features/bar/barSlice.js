@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createBarThunk, getBarsThunk } from "./barThunk";
+import { createBarThunk } from "./barThunk";
+import axios from "axios";
 const initialState = {
   type: "",
   categoryTr: "",
@@ -19,10 +20,18 @@ export const createBar = createAsyncThunk(
     createBarThunk("bars/create", bar, thunkAPI);
   }
 );
-export const getBars = createAsyncThunk("bar/getBar", async (thunkAPI) => {
-  getBarsThunk("bars/", thunkAPI);
-});
-
+//get bars by type
+export const getBars = createAsyncThunk(
+  "bar/deneme",
+  async (type, thunkAPI) => {
+    try {
+      const resp = await axios.post(`api/v1/bars/`, { type });
+      return resp.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 const barSlice = createSlice({
   name: "bar",
   initialState,
@@ -56,12 +65,13 @@ const barSlice = createSlice({
         state.isLoading = false;
         toast.error(action.payload);
       })
+
       .addCase(getBars.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getBars.fulfilled, (state, action) => {
+      .addCase(getBars.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.bars = action.payload;
+        state.bars = payload.bar;
       })
       .addCase(getBars.rejected, (state, action) => {
         state.isLoading = false;

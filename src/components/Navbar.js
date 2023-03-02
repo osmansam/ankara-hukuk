@@ -44,7 +44,7 @@ const Navbar = () => {
                     className={`${activeNav === en ? "active-bar" : ""}`}
                     to={link}
                     onClick={() => {
-                      dispatch(setActiveNav("en"));
+                      dispatch(setActiveNav(en));
                     }}
                   >
                     {language === "tr" ? tr : en}
