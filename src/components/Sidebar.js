@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { closeSideBar, setActiveNav } from "../features/global/globalSlice";
+import { closeSideBar, setActiveNav } from "../features/bar/barSlice";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
