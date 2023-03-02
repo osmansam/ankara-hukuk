@@ -4,6 +4,8 @@ import { createLawyerThunk } from "./lawyerThunk";
 
 const initialState = {
   isLoading: false,
+  type: "Lawyer",
+  typeOptions: ["Lawyer", "Dealer"],
   name: "",
   email: "",
   image: "",

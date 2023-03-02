@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
 import FormRow from "../components/FormRow";
+import FormRowSelect from "../components/FormRowSelect";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -19,6 +20,8 @@ const AddLawyer = () => {
   const [photo, setPhoto] = useState(null);
   const [isImage, setIsImage] = useState(false);
   const {
+    type,
+    typeOptions,
     name,
     email,
     image,
@@ -57,6 +60,7 @@ const AddLawyer = () => {
       }
       dispatch(
         createLawyer({
+          type,
           name,
           email,
           image,
@@ -139,6 +143,13 @@ const AddLawyer = () => {
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
+        <FormRowSelect
+          name="type"
+          value={type}
+          handleChange={handleLawyerChange}
+          labelText="Type"
+          list={typeOptions}
+        />
         <FormRow
           type="text"
           name="name"
