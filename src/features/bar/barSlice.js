@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createBarThunk } from "./barThunk";
+import { createBarThunk, getBarsThunk } from "./barThunk";
 const initialState = {
   type: "",
   categoryTr: "",
@@ -10,6 +10,7 @@ const initialState = {
   language: "tr",
   isSideBar: false,
   activeNav: "",
+  bars: [],
 };
 
 export const createBar = createAsyncThunk(
@@ -18,6 +19,9 @@ export const createBar = createAsyncThunk(
     createBarThunk("bars/create", bar, thunkAPI);
   }
 );
+export const getBars = createAsyncThunk("bar/getBar", async (thunkAPI) => {
+  getBarsThunk("bars/", thunkAPI);
+});
 
 const barSlice = createSlice({
   name: "bar",
@@ -49,6 +53,17 @@ const barSlice = createSlice({
         toast.success("Bar Created Successfully");
       })
       .addCase(createBar.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
+      })
+      .addCase(getBars.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getBars.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.bars = action.payload;
+      })
+      .addCase(getBars.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload);
       });

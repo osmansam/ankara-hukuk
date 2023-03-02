@@ -1,16 +1,23 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { FaBars } from "react-icons/fa";
 import Languages from "../components/Languages";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import { getLinks } from "../features/link/linkSlice";
+
 const Navbar = () => {
   const dispatch = useDispatch();
   const { language, activeNav, setActiveNav, openSideBar } = useSelector(
     (store) => store.bar
   );
+
   const { links } = useSelector((store) => store.link);
+  useEffect(() => {
+    dispatch(getLinks());
+  }, [dispatch]);
+  console.log(links, "links");
   return (
     <Wrapper>
       <nav className="navbar">
@@ -26,7 +33,7 @@ const Navbar = () => {
         </Link>
         <div className="nav-center">
           <ul className="nav-links">
-            {links.map((item, index) => {
+            {links?.map((item, index) => {
               const { en, tr, link } = item;
               return (
                 <li key={index}>
