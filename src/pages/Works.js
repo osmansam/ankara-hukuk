@@ -3,15 +3,16 @@ import Section from "../components/Section";
 import Teambar from "../components/Teambar";
 import { useSelector, useDispatch } from "react-redux";
 import { getBars } from "../features/bar/barSlice";
+import { getInfos } from "../features/info/infoSlice";
 import styled from "styled-components";
 
 const Works = () => {
   const dispatch = useDispatch();
   const { bars } = useSelector((store) => store.bar);
+  const { infos } = useSelector((store) => store.info);
   const { language, activeTab } = useSelector((store) => store.bar);
-  // const [worksBar, setWorksBar] = useState([]);
-  // const [worksInfo, setWorksInfo] = useState([]);
-  // const [workItem, setWorkItem] = useState(null);
+
+  const [workItem, setWorkItem] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,10 +21,11 @@ const Works = () => {
   useEffect(() => {
     const type = "Work";
     dispatch(getBars(type));
+    dispatch(getInfos(type));
   }, [dispatch]);
 
-  // React.useEffect(() => {
-  //   setWorkItem(worksInfo.find((item) => item._id === activeTab));
+  // useEffect(() => {
+  //   setWorkItem(infos?.find((item) => item._id === activeTab));
   // }, [activeTab]);
 
   return (
@@ -31,12 +33,14 @@ const Works = () => {
       <Section props="works" />
       <div className="team">
         <Teambar props={bars} />
-        {/* {workItem &&
-            <div  className="works-info-center">
-              <h3 >{language ==='tr'?workItem.headerTr:workItem.headerEn}</h3>
-              {language ==='tr'?workItem.infoTr.split("\n").map(p => <p >{p}</p>):workItem.infoEn.split("\n").map(p => <p>{p}</p>)}
-            </div>
-          } */}
+        {/* {workItem && (
+          <div className="works-info-center">
+            <h3>{language === "tr" ? workItem.headerTr : workItem.headerEn}</h3>
+            {language === "tr"
+              ? workItem.infoTr.split("\n").map((p) => <p>{p}</p>)
+              : workItem.infoEn.split("\n").map((p) => <p>{p}</p>)}
+          </div>
+        )} */}
       </div>
     </Wrapper>
   );

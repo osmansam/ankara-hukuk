@@ -22,7 +22,7 @@ export const createBar = createAsyncThunk(
 );
 //get bars by type
 export const getBars = createAsyncThunk(
-  "bar/deneme",
+  "bar/getBars",
   async (type, thunkAPI) => {
     try {
       const resp = await axios.post(`api/v1/bars/`, { type });
