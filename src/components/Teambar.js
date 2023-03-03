@@ -59,6 +59,7 @@ const Wrapper = styled.div`
     width: 100%;
     flex-flow: column wrap;
     text-transform: capitalize;
+    margin-left: 3em;
   }
 
   .teambar-tab {
