@@ -1,0 +1,115 @@
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+
+const Lawyers = ({ props }) => {
+  const { language } = useSelector((store) => store.bar);
+  if (!props) return null;
+  if (props.length > 0) {
+    return (
+      <Wrapper>
+        <div className="lawyers">
+          {props.map((item, index) => {
+            const {
+              type,
+              image,
+              name,
+              dutyTr,
+              dutyEn,
+              educationTr,
+              educationEn,
+              barAssosiationTr,
+              barAssosiationEn,
+              languagesTr,
+              languagesEn,
+              expertiseTr,
+              expertiseEn,
+              email,
+            } = item;
+            return (
+              <div className="lawyer" key={index}>
+                <img className="lawyer-image" src={image} alt="lawyer-image" />
+                <div className="lawyer-info">
+                  <h2>osman</h2>
+                  <h3>{name}</h3>
+                  <h4>{language === "en" ? dutyEn : dutyTr}</h4>
+                  <p>
+                    <span className="bold-lawyer">
+                      {language === "tr"
+                        ? "eğitim:"
+                        : "educational background:    "}
+                    </span>{" "}
+                    {language === "en" ? educationEn : educationTr}
+                  </p>
+                  <p>
+                    <span className="bold-lawyer">
+                      {language === "tr"
+                        ? "baro kaydı: "
+                        : "bar association registration:    "}
+                    </span>{" "}
+                    {language === "en" ? barAssosiationEn : barAssosiationTr}
+                  </p>
+                  <p>
+                    <span className="bold-lawyer">
+                      {language === "tr"
+                        ? "konuştuğu diller:"
+                        : "foreign languages:    "}
+                    </span>{" "}
+                    {language === "en" ? languagesEn : languagesTr}
+                  </p>
+                  <p>
+                    <span className="bold-lawyer">
+                      {language === "tr"
+                        ? "uzmanlık alanları:"
+                        : "fields of expertise:    "}
+                    </span>{" "}
+                    {language === "en" ? expertiseEn : expertiseTr}
+                  </p>
+                  <p>
+                    <span className="bold-lawyer">e-mail:</span> {email}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Wrapper>
+    );
+  }
+};
+const Wrapper = styled.div`
+  .lawyer {
+    display: flex;
+    flex-wrap: column wrap;
+    justify-content: space-between;
+    align-content: center;
+    margin-bottom: 3em;
+    text-transform: capitalize;
+  }
+  .lawyer-image {
+    width: 10rem;
+    margin-right: 2em;
+    border-radius: 2em;
+  }
+  .lawyer-info {
+    margin-top: 0.6em;
+    margin-left: -5em;
+    border: 2px solid black;
+  }
+  .bold-lawyer {
+    font-weight: 500;
+  }
+  .lawyer p {
+    font-size: 0.7em;
+    line-height: 1.1rem;
+  }
+  .lawyer h3 {
+    font-size: 0.8rem;
+  }
+  .lawyer h4 {
+    font-size: 0.7rem;
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+`;
+export default Lawyers;

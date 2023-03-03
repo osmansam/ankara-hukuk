@@ -7,6 +7,7 @@ import AddLink from "./pages/AddLink";
 import Home from "./pages/Home";
 import Works from "./pages/Works";
 import About from "./pages/About";
+import OurTeam from "./pages/OurTeam";
 import HumanResources from "./pages/HumanResources";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -42,8 +43,8 @@ function App() {
         <Route path="/works" exact>
           <Works />
         </Route>
-        <Route path="/works" exact>
-          <Works />
+        <Route path="/ourteam" exact>
+          <OurTeam />
         </Route>
         <Route path="/humanresources" exact>
           <HumanResources />
