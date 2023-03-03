@@ -9,6 +9,7 @@ import Works from "./pages/Works";
 import About from "./pages/About";
 import HumanResources from "./pages/HumanResources";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -49,6 +50,7 @@ function App() {
         </Route>
       </Switch>
       <ToastContainer position="top-center" />
+      <Footer />
     </Router>
   );
 }
