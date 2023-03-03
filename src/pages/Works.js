@@ -8,9 +8,8 @@ import styled from "styled-components";
 
 const Works = () => {
   const dispatch = useDispatch();
-  const { bars } = useSelector((store) => store.bar);
   const { infos } = useSelector((store) => store.info);
-  const { language, activeTab } = useSelector((store) => store.bar);
+  const { language, activeTab, bars } = useSelector((store) => store.bar);
 
   const [workItem, setWorkItem] = useState(null);
 
@@ -28,9 +27,10 @@ const Works = () => {
       dispatch(setActiveTab(bars[0].categoryTr));
     }
   }, [bars]);
+
   useEffect(() => {
     setWorkItem(infos?.find((item) => item.headerTr === activeTab));
-  }, [activeTab]);
+  }, [activeTab, infos]);
 
   return (
     <Wrapper>
@@ -56,13 +56,6 @@ const Works = () => {
   );
 };
 const Wrapper = styled.main`
-  /* display: flex;
-  flex-wrap: row wrap;
-  justify-content: center;
-  align-content: center;
-  height: auto;
-  min-width: 800px;
-  width: 100%; */
   .team {
     display: grid;
     grid-template-columns: 0.5fr 100%;
