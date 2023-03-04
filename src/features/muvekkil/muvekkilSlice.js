@@ -20,6 +20,7 @@ const initialState = {
   kalanTutar: "",
   vadeTarihi: "",
   yapilanMasraf: "",
+  isEditing: false,
 };
 
 export const createMuvekkil = createAsyncThunk(
@@ -35,6 +36,9 @@ const muvekkilSlice = createSlice({
   reducers: {
     handleChange: (state, { payload: { name, value } }) => {
       state[name] = value;
+    },
+    setEditing: (state, { payload }) => {
+      state.isEditing = payload;
     },
   },
 
@@ -53,5 +57,5 @@ const muvekkilSlice = createSlice({
       });
   },
 });
-export const { handleChange } = muvekkilSlice.actions;
+export const { handleChange, setEditing } = muvekkilSlice.actions;
 export default muvekkilSlice.reducer;
