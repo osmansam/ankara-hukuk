@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { createLawyerThunk } from "./lawyerThunk";
+import axios from "axios";
 
 const initialState = {
   isLoading: false,
-  type: "Lawyer",
-  typeOptions: ["Lawyer", "Dealer"],
+  type: "Avukat",
+  typeOptions: ["Avukat", "Arabulucu"],
   name: "",
   email: "",
   image: "",
@@ -19,6 +20,7 @@ const initialState = {
   languagesEn: "",
   expertiseTr: "",
   expertiseEn: "",
+  lawyers: [],
 };
 
 export const createLawyer = createAsyncThunk(
@@ -27,7 +29,18 @@ export const createLawyer = createAsyncThunk(
     createLawyerThunk("lawyers/", lawyer, thunkAPI);
   }
 );
-
+//get lawyers
+export const getLawyers = createAsyncThunk(
+  "lawyer/getLawyers",
+  async (type, thunkAPI) => {
+    try {
+      const resp = await axios.get(`api/v1/lawyers/`);
+      return resp.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 const lawyerSlice = createSlice({
   name: "lawyer",
   initialState,
@@ -55,6 +68,17 @@ const lawyerSlice = createSlice({
         toast.success("Lawyer Created Successfully");
       })
       .addCase(createLawyer.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
+      })
+      .addCase(getLawyers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getLawyers.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.lawyers = payload.lawyers;
+      })
+      .addCase(getLawyers.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload);
       });
