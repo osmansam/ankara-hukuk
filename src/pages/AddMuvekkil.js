@@ -6,156 +6,159 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
-  handleChange,
   createMuvekkil,
-  setEditing,
+  updateMuvekkil,
 } from "../features/muvekkil/muvekkilSlice";
 import styled from "styled-components";
 
-const AddMuvekkil = () => {
+const AddMuvekkil = ({ props }) => {
+  const initialState = {
+    ad: "",
+    soyad: "",
+    tc: "",
+    telefon: "",
+    email: "",
+    adres: "",
+    dosyaMahkemesi: "",
+    dosyaNo: "",
+    toplamBorc: "",
+    vekaletUcreti: "",
+    masraf: "",
+    alinanVekalet: "",
+    kalanTutar: "",
+    vadeTarihi: "",
+    yapilanMasraf: "",
+    isEditing: false,
+  };
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const {
-    isLoading,
-    ad,
-    soyad,
-    tc,
-    telefon,
-    email,
-    adres,
-    dosyaMahkemesi,
-    dosyaNo,
-    toplamBorc,
-    vekaletUcreti,
-    masraf,
-    alinanVekalet,
-    kalanTutar,
-    vadeTarihi,
-    yapilanMasraf,
-    isEditing,
-  } = useSelector((store) => store.muvekkil);
+  if (props) {
+    setMuvekkil(props);
+  }
+  const [muvekkil, setMuvekkil] = useState(initialState);
 
   const handleFormChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    dispatch(handleChange({ name, value }));
+    setMuvekkil({ ...muvekkil, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!ad || !soyad) {
-      toast.error("Please fill ad and soyad fields");
-      return;
+    const { ad, soyad, isEditing } = muvekkil;
+    if (!isEditing) {
+      if (!ad || !soyad) {
+        toast.error("Please fill ad and soyad fields");
+        return;
+      }
+      dispatch(createMuvekkil(muvekkil));
+      setMuvekkil({ ...initialState, isEditing: true });
+    } else {
+      if (!ad || !soyad) {
+        toast.error("Please fill ad and soyad fields");
+        return;
+      }
+      dispatch(updateMuvekkil(muvekkil));
+      setMuvekkil({ ...initialState, isEditing: true });
     }
-    dispatch(
-      createMuvekkil({
-        ad,
-        soyad,
-        tc,
-        telefon,
-        email,
-        adres,
-        dosyaMahkemesi,
-        dosyaNo,
-        toplamBorc,
-        vekaletUcreti,
-        masraf,
-        alinanVekalet,
-        kalanTutar,
-        vadeTarihi,
-        yapilanMasraf,
-      })
-    );
-    setEditing(true);
   };
 
   return (
     <Wrapper>
       <form onSubmit={handleSubmit}>
-        <FormRow label="Ad" name="ad" value={ad} onChange={handleFormChange} />
+        <FormRow
+          label="Ad"
+          name="ad"
+          value={muvekkil.ad}
+          handleChange={handleFormChange}
+        />
         <FormRow
           label="Soyad"
           name="soyad"
-          value={soyad}
-          onChange={handleFormChange}
+          value={muvekkil.soyad}
+          handleChange={handleFormChange}
         />
-        <FormRow label="TC" name="tc" value={tc} onChange={handleFormChange} />
+        <FormRow
+          label="TC"
+          name="tc"
+          value={muvekkil.tc}
+          handleChange={handleFormChange}
+        />
         <FormRow
           label="Telefon"
           name="telefon"
-          value={telefon}
-          onChange={handleFormChange}
+          value={muvekkil.telefon}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Email"
           name="email"
-          value={email}
-          onChange={handleFormChange}
+          value={muvekkil.email}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Adres"
           name="adres"
-          value={adres}
-          onChange={handleFormChange}
+          value={muvekkil.adres}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Dosya Mahkemesi"
           name="dosyaMahkemesi"
-          value={dosyaMahkemesi}
-          onChange={handleFormChange}
+          value={muvekkil.dosyaMahkemesi}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Dosya No"
           name="dosyaNo"
-          value={dosyaNo}
-          onChange={handleFormChange}
+          value={muvekkil.dosyaNo}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Toplam Borç"
           name="toplamBorc"
-          value={toplamBorc}
-          onChange={handleFormChange}
+          value={muvekkil.toplamBorc}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Vekalet Ücreti"
           name="vekaletUcreti"
-          value={vekaletUcreti}
-          onChange={handleFormChange}
+          value={muvekkil.vekaletUcreti}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Masraf"
           name="masraf"
-          value={masraf}
-          onChange={handleFormChange}
+          value={muvekkil.masraf}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Alınan Vekalet"
           name="alinanVekalet"
-          value={alinanVekalet}
-          onChange={handleFormChange}
+          value={muvekkil.alinanVekalet}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Kalan Tutar"
           name="kalanTutar"
-          value={kalanTutar}
-          onChange={handleFormChange}
+          value={muvekkil.kalanTutar}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Vade Tarihi"
           name="vadeTarihi"
-          value={vadeTarihi}
-          onChange={handleFormChange}
+          value={muvekkil.vadeTarihi}
+          handleChange={handleFormChange}
         />
         <FormRow
           label="Yapılan Masraf"
           name="yapilanMasraf"
-          value={yapilanMasraf}
-          onChange={handleFormChange}
+          value={muvekkil.yapilanMasraf}
+          handleChange={handleFormChange}
         />
 
         <button type="submit" className="btn btn-block">
-          Submit
+          {muvekkil.isEditing ? "Update" : "Add"}
         </button>
       </form>
     </Wrapper>

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createMuvekkilThunk } from "./muvekkilThunk";
+import { createMuvekkilThunk, updateMuvekkilThunk } from "./muvekkilThunk";
 const initialState = {
   isLoading: false,
   muvekkil: {},
@@ -29,6 +29,12 @@ export const createMuvekkil = createAsyncThunk(
     createMuvekkilThunk("muvekkils/", muvekkil, thunkAPI);
   }
 );
+export const updateMuvekkil = createAsyncThunk(
+  "muvekkil/updateMuvekkil",
+  async (muvekkil, thunkAPI) => {
+    updateMuvekkilThunk(`muvekkils/${muvekkil._id}`, muvekkil, thunkAPI);
+  }
+);
 
 const muvekkilSlice = createSlice({
   name: "muvekkil",
@@ -39,6 +45,9 @@ const muvekkilSlice = createSlice({
     },
     setEditing: (state, { payload }) => {
       state.isEditing = payload;
+    },
+    clearMuvekkil: (state) => {
+      return initialState;
     },
   },
 
@@ -57,5 +66,6 @@ const muvekkilSlice = createSlice({
       });
   },
 });
-export const { handleChange, setEditing } = muvekkilSlice.actions;
+export const { handleChange, setEditing, clearMuvekkil } =
+  muvekkilSlice.actions;
 export default muvekkilSlice.reducer;
