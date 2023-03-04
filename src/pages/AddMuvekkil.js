@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import {
   handleChange,
   createMuvekkil,
+  setEditing,
 } from "../features/muvekkil/muvekkilSlice";
 import styled from "styled-components";
 
@@ -32,6 +33,7 @@ const AddMuvekkil = () => {
     kalanTutar,
     vadeTarihi,
     yapilanMasraf,
+    isEditing,
   } = useSelector((store) => store.muvekkil);
 
   const handleFormChange = (e) => {
@@ -65,7 +67,7 @@ const AddMuvekkil = () => {
         yapilanMasraf,
       })
     );
-    // history.push("/muvekkil");
+    setEditing(true);
   };
 
   return (
