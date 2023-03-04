@@ -4,6 +4,7 @@ import AddBar from "./pages/AddBar";
 import AddInfo from "./pages/AddInfo";
 import AddLawyer from "./pages/AddLawyer";
 import AddLink from "./pages/AddLink";
+import AddMuvekkil from "./pages/AddMuvekkil";
 import Home from "./pages/Home";
 import Works from "./pages/Works";
 import About from "./pages/About";
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route path="/add-link" exact>
           <AddLink />
+        </Route>
+        <Route path="/add-muvekkil" exact>
+          <AddMuvekkil />
         </Route>
         <Route path="/about" exact>
           <About />

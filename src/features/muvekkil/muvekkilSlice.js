@@ -32,7 +32,11 @@ export const createMuvekkil = createAsyncThunk(
 const muvekkilSlice = createSlice({
   name: "muvekkil",
   initialState,
-  reducers: {},
+  reducers: {
+    handleChange: (state, { payload: { name, value } }) => {
+      state[name] = value;
+    },
+  },
 
   extraReducers: (builder) => {
     builder
@@ -49,5 +53,5 @@ const muvekkilSlice = createSlice({
       });
   },
 });
-export const {} = muvekkilSlice.actions;
+export const { handleChange } = muvekkilSlice.actions;
 export default muvekkilSlice.reducer;
