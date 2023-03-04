@@ -18,8 +18,8 @@ const Lawyers = ({ props }) => {
               dutyEn,
               educationTr,
               educationEn,
-              barAssosiationTr,
-              barAssosiationEn,
+              barAssociationTr,
+              barAssociationEn,
               languagesTr,
               languagesEn,
               expertiseTr,
@@ -30,7 +30,6 @@ const Lawyers = ({ props }) => {
               <div className="lawyer" key={index}>
                 <img className="lawyer-image" src={image} alt="lawyer-image" />
                 <div className="lawyer-info">
-                  <h2>osman</h2>
                   <h3>{name}</h3>
                   <h4>{language === "en" ? dutyEn : dutyTr}</h4>
                   <p>
@@ -47,7 +46,7 @@ const Lawyers = ({ props }) => {
                         ? "baro kaydı: "
                         : "bar association registration:    "}
                     </span>{" "}
-                    {language === "en" ? barAssosiationEn : barAssosiationTr}
+                    {language === "en" ? barAssociationTr : barAssociationEn}
                   </p>
                   <p>
                     <span className="bold-lawyer">
@@ -81,7 +80,6 @@ const Wrapper = styled.div`
   .lawyer {
     display: flex;
     flex-wrap: column wrap;
-    justify-content: space-between;
     align-content: center;
     margin-bottom: 3em;
     text-transform: capitalize;
@@ -93,8 +91,6 @@ const Wrapper = styled.div`
   }
   .lawyer-info {
     margin-top: 0.6em;
-    margin-left: -5em;
-    border: 2px solid black;
   }
   .bold-lawyer {
     font-weight: 500;
