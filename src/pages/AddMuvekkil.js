@@ -8,58 +8,73 @@ import { useHistory } from "react-router-dom";
 import {
   createMuvekkil,
   updateMuvekkil,
+  handleChange,
+  setEditing,
+  clearMuvekkil,
 } from "../features/muvekkil/muvekkilSlice";
 import styled from "styled-components";
 
-const AddMuvekkil = ({ props }) => {
-  const initialState = {
-    ad: "",
-    soyad: "",
-    tc: "",
-    telefon: "",
-    email: "",
-    adres: "",
-    dosyaMahkemesi: "",
-    dosyaNo: "",
-    toplamBorc: "",
-    vekaletUcreti: "",
-    masraf: "",
-    alinanVekalet: "",
-    kalanTutar: "",
-    vadeTarihi: "",
-    yapilanMasraf: "",
-    isEditing: false,
-  };
+const AddMuvekkil = () => {
+  const {
+    ad,
+    soyad,
+    tc,
+    telefon,
+    email,
+    adres,
+    dosyaMahkemesi,
+    dosyaNo,
+    toplamBorc,
+    vekaletUcreti,
+    masraf,
+    alinanVekalet,
+    kalanTutar,
+    vadeTarihi,
+    yapilanMasraf,
+    isEditing,
+  } = useSelector((state) => state.muvekkil);
   const dispatch = useDispatch();
   const history = useHistory();
-  if (props) {
-    setMuvekkil(props);
-  }
-  const [muvekkil, setMuvekkil] = useState(initialState);
 
   const handleFormChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setMuvekkil({ ...muvekkil, [name]: value });
+    dispatch(handleChange({ name, value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { ad, soyad, isEditing } = muvekkil;
     if (!isEditing) {
       if (!ad || !soyad) {
         toast.error("Please fill ad and soyad fields");
         return;
       }
-      dispatch(createMuvekkil(muvekkil));
-      setMuvekkil({ ...initialState, isEditing: true });
+      dispatch(setEditing(true));
+      dispatch(
+        createMuvekkil({
+          ad,
+          soyad,
+          tc,
+          telefon,
+          email,
+          adres,
+          dosyaMahkemesi,
+          dosyaNo,
+          toplamBorc,
+          vekaletUcreti,
+          masraf,
+          alinanVekalet,
+          kalanTutar,
+          vadeTarihi,
+          yapilanMasraf,
+          isEditing,
+        })
+      );
     } else {
       if (!ad || !soyad) {
         toast.error("Please fill ad and soyad fields");
         return;
       }
-      dispatch(updateMuvekkil(muvekkil));
-      setMuvekkil({ ...initialState, isEditing: true });
     }
   };
 
@@ -69,96 +84,96 @@ const AddMuvekkil = ({ props }) => {
         <FormRow
           label="Ad"
           name="ad"
-          value={muvekkil.ad}
+          value={ad}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Soyad"
           name="soyad"
-          value={muvekkil.soyad}
+          value={soyad}
           handleChange={handleFormChange}
         />
         <FormRow
           label="TC"
           name="tc"
-          value={muvekkil.tc}
+          value={tc}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Telefon"
           name="telefon"
-          value={muvekkil.telefon}
+          value={telefon}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Email"
           name="email"
-          value={muvekkil.email}
+          value={email}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Adres"
           name="adres"
-          value={muvekkil.adres}
+          value={adres}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Dosya Mahkemesi"
           name="dosyaMahkemesi"
-          value={muvekkil.dosyaMahkemesi}
+          value={dosyaMahkemesi}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Dosya No"
           name="dosyaNo"
-          value={muvekkil.dosyaNo}
+          value={dosyaNo}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Toplam Borç"
           name="toplamBorc"
-          value={muvekkil.toplamBorc}
+          value={toplamBorc}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Vekalet Ücreti"
           name="vekaletUcreti"
-          value={muvekkil.vekaletUcreti}
+          value={vekaletUcreti}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Masraf"
           name="masraf"
-          value={muvekkil.masraf}
+          value={masraf}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Alınan Vekalet"
           name="alinanVekalet"
-          value={muvekkil.alinanVekalet}
+          value={alinanVekalet}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Kalan Tutar"
           name="kalanTutar"
-          value={muvekkil.kalanTutar}
+          value={kalanTutar}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Vade Tarihi"
           name="vadeTarihi"
-          value={muvekkil.vadeTarihi}
+          value={vadeTarihi}
           handleChange={handleFormChange}
         />
         <FormRow
           label="Yapılan Masraf"
           name="yapilanMasraf"
-          value={muvekkil.yapilanMasraf}
+          value={yapilanMasraf}
           handleChange={handleFormChange}
         />
 
         <button type="submit" className="btn btn-block">
-          {muvekkil.isEditing ? "Update" : "Add"}
+          {isEditing ? "Update" : "Add"}
         </button>
       </form>
     </Wrapper>
