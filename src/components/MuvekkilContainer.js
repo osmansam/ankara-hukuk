@@ -15,8 +15,9 @@ const MuvekkilContainer = ({ muvekkils }) => {
 const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
   margin: 2rem 0;
+  width: 100%;
 `;
 
 export default MuvekkilContainer;

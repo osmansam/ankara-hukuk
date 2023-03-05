@@ -14,4 +14,14 @@ const Muvekkil = ({ muvekkil }) => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  .muvekkil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+  }
+`;
+
+export default Muvekkil;
