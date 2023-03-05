@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { createMuvekkilThunk, updateMuvekkilThunk } from "./muvekkilThunk";
+import { checkForUnauthorizedResponse } from "../../utils/axios";
+import axios from "axios";
 const initialState = {
+  id: "",
   isLoading: false,
   muvekkil: {},
   muvekkils: [],
@@ -33,10 +36,21 @@ export const createMuvekkil = createAsyncThunk(
 export const updateMuvekkil = createAsyncThunk(
   "muvekkil/updateMuvekkil",
   async (muvekkil, thunkAPI) => {
-    updateMuvekkilThunk(`muvekkils/${muvekkil._id}`, muvekkil, thunkAPI);
+    updateMuvekkilThunk(`muvekkils/${muvekkil.id}`, muvekkil, thunkAPI);
   }
 );
 
+export const getMuvekkils = createAsyncThunk(
+  "muvekkil/getMuvekkils",
+  async (muvekkil, thunkAPI) => {
+    try {
+      const resp = await axios.get("/api/v1/muvekkils");
+      return resp.data;
+    } catch (error) {
+      return checkForUnauthorizedResponse(error, thunkAPI);
+    }
+  }
+);
 const muvekkilSlice = createSlice({
   name: "muvekkil",
   initialState,
@@ -49,6 +63,9 @@ const muvekkilSlice = createSlice({
     },
     clearMuvekkil: (state) => {
       return initialState;
+    },
+    setId: (state, { payload }) => {
+      state.id = payload;
     },
     setEditMuvekkil: (state, { payload }) => {
       return { ...state, isEditing: true, ...payload };
@@ -78,9 +95,25 @@ const muvekkilSlice = createSlice({
       .addCase(updateMuvekkil.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload);
+      })
+      .addCase(getMuvekkils.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getMuvekkils.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.muvekkils = action.payload.muvekkils;
+      })
+      .addCase(getMuvekkils.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
       });
   },
 });
-export const { handleChange, setEditing, clearMuvekkil, setEditMuvekkil } =
-  muvekkilSlice.actions;
+export const {
+  handleChange,
+  setEditing,
+  clearMuvekkil,
+  setEditMuvekkil,
+  setId,
+} = muvekkilSlice.actions;
 export default muvekkilSlice.reducer;
