@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { createMuvekkilThunk, updateMuvekkilThunk } from "./muvekkilThunk";
+import { checkForUnauthorizedResponse } from "../../utils/axios";
+import axios from "axios";
 const initialState = {
   isLoading: false,
   muvekkil: {},
@@ -37,6 +39,17 @@ export const updateMuvekkil = createAsyncThunk(
   }
 );
 
+export const getMuvekkils = createAsyncThunk(
+  "muvekkil/getMuvekkils",
+  async (muvekkil, thunkAPI) => {
+    try {
+      const resp = await axios.get("/api/v1/muvekkils");
+      return resp.data;
+    } catch (error) {
+      return checkForUnauthorizedResponse(error, thunkAPI);
+    }
+  }
+);
 const muvekkilSlice = createSlice({
   name: "muvekkil",
   initialState,
@@ -76,6 +89,17 @@ const muvekkilSlice = createSlice({
         toast.success("Muvekkil Updated Successfully");
       })
       .addCase(updateMuvekkil.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
+      })
+      .addCase(getMuvekkils.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getMuvekkils.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.muvekkils = action.payload.muvekkils;
+      })
+      .addCase(getMuvekkils.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload);
       });
