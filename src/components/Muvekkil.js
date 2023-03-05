@@ -1,14 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { setEditMuvekkil } from "../features/muvekkil/muvekkilSlice";
+import { useDispatch } from "react-redux";
 
 const Muvekkil = ({ muvekkil }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   return (
-    <Wrapper onClick={() => history.push(`/muvekkil/${muvekkil._id}`)}>
+    <Wrapper>
       <div className="muvekkil">
         <h4>{muvekkil.ad}</h4>
         <p>{muvekkil.soyad}</p>
+        <button
+          onClick={() => {
+            dispatch(setEditMuvekkil(muvekkil));
+            history.push("/add-muvekkil");
+          }}
+        >
+          Edit
+        </button>
       </div>
     </Wrapper>
   );
@@ -18,9 +29,11 @@ const Wrapper = styled.div`
   .muvekkil {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     border: 1px solid #ccc;
+    height: 200px;
+    width: 200px;
   }
 `;
 
