@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { setEditMuvekkil } from "../features/muvekkil/muvekkilSlice";
 import { useDispatch } from "react-redux";
+import { setId } from "../features/muvekkil/muvekkilSlice";
 
 const Muvekkil = ({ muvekkil }) => {
   const history = useHistory();
@@ -15,6 +16,7 @@ const Muvekkil = ({ muvekkil }) => {
         <button
           onClick={() => {
             dispatch(setEditMuvekkil(muvekkil));
+            dispatch(setId(muvekkil._id));
             history.push("/add-muvekkil");
           }}
         >

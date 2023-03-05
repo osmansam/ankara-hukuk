@@ -4,6 +4,7 @@ import { createMuvekkilThunk, updateMuvekkilThunk } from "./muvekkilThunk";
 import { checkForUnauthorizedResponse } from "../../utils/axios";
 import axios from "axios";
 const initialState = {
+  id: "",
   isLoading: false,
   muvekkil: {},
   muvekkils: [],
@@ -35,7 +36,7 @@ export const createMuvekkil = createAsyncThunk(
 export const updateMuvekkil = createAsyncThunk(
   "muvekkil/updateMuvekkil",
   async (muvekkil, thunkAPI) => {
-    updateMuvekkilThunk(`muvekkils/${muvekkil._id}`, muvekkil, thunkAPI);
+    updateMuvekkilThunk(`muvekkils/${muvekkil.id}`, muvekkil, thunkAPI);
   }
 );
 
@@ -62,6 +63,9 @@ const muvekkilSlice = createSlice({
     },
     clearMuvekkil: (state) => {
       return initialState;
+    },
+    setId: (state, { payload }) => {
+      state.id = payload;
     },
     setEditMuvekkil: (state, { payload }) => {
       return { ...state, isEditing: true, ...payload };
@@ -105,6 +109,11 @@ const muvekkilSlice = createSlice({
       });
   },
 });
-export const { handleChange, setEditing, clearMuvekkil, setEditMuvekkil } =
-  muvekkilSlice.actions;
+export const {
+  handleChange,
+  setEditing,
+  clearMuvekkil,
+  setEditMuvekkil,
+  setId,
+} = muvekkilSlice.actions;
 export default muvekkilSlice.reducer;

@@ -15,6 +15,7 @@ import styled from "styled-components";
 
 const AddMuvekkil = () => {
   const {
+    id,
     ad,
     soyad,
     tc,
@@ -74,6 +75,28 @@ const AddMuvekkil = () => {
         toast.error("Please fill ad and soyad fields");
         return;
       }
+      dispatch(
+        updateMuvekkil({
+          id,
+          ad,
+          soyad,
+          tc,
+          telefon,
+          email,
+          adres,
+          dosyaMahkemesi,
+          dosyaNo,
+          toplamBorc,
+          vekaletUcreti,
+          masraf,
+          alinanVekalet,
+          kalanTutar,
+          vadeTarihi,
+          yapilanMasraf,
+          isEditing: true,
+        })
+      );
+      dispatch(clearMuvekkil());
     }
   };
 
