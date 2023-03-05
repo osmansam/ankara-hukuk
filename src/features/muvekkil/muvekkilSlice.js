@@ -20,6 +20,7 @@ const initialState = {
   kalanTutar: "",
   vadeTarihi: "",
   yapilanMasraf: "",
+  editMuvekkilId: "",
   isEditing: false,
 };
 
@@ -49,6 +50,9 @@ const muvekkilSlice = createSlice({
     clearMuvekkil: (state) => {
       return initialState;
     },
+    setEditMuvekkil: (state, { payload }) => {
+      return { ...state, isEditing: true, ...payload };
+    },
   },
 
   extraReducers: (builder) => {
@@ -63,9 +67,20 @@ const muvekkilSlice = createSlice({
       .addCase(createMuvekkil.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload);
+      })
+      .addCase(updateMuvekkil.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateMuvekkil.fulfilled, (state, action) => {
+        state.isLoading = false;
+        toast.success("Muvekkil Updated Successfully");
+      })
+      .addCase(updateMuvekkil.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
       });
   },
 });
-export const { handleChange, setEditing, clearMuvekkil } =
+export const { handleChange, setEditing, clearMuvekkil, setEditMuvekkil } =
   muvekkilSlice.actions;
 export default muvekkilSlice.reducer;
