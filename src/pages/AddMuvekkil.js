@@ -9,7 +9,6 @@ import {
   createMuvekkil,
   updateMuvekkil,
   handleChange,
-  setEditing,
   clearMuvekkil,
 } from "../features/muvekkil/muvekkilSlice";
 import styled from "styled-components";
@@ -49,7 +48,6 @@ const AddMuvekkil = () => {
         toast.error("Please fill ad and soyad fields");
         return;
       }
-      dispatch(setEditing(true));
       dispatch(
         createMuvekkil({
           ad,
@@ -67,9 +65,10 @@ const AddMuvekkil = () => {
           kalanTutar,
           vadeTarihi,
           yapilanMasraf,
-          isEditing,
+          isEditing: true,
         })
       );
+      dispatch(clearMuvekkil());
     } else {
       if (!ad || !soyad) {
         toast.error("Please fill ad and soyad fields");
