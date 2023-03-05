@@ -11,17 +11,21 @@ const Muvekkil = ({ muvekkil }) => {
   return (
     <Wrapper>
       <div className="muvekkil">
-        <h4>{muvekkil.ad}</h4>
-        <p>{muvekkil.soyad}</p>
-        <button
-          onClick={() => {
-            dispatch(setEditMuvekkil(muvekkil));
-            dispatch(setId(muvekkil._id));
-            history.push("/add-muvekkil");
-          }}
-        >
-          Edit
-        </button>
+        <div className="table-row">
+          <div className="table-cell">{muvekkil.ad}</div>
+          <div className="table-cell">{muvekkil.soyad}</div>
+          <div className="table-cell">{muvekkil.tc}</div>
+          <div className="table-cell">{muvekkil.telefon}</div>
+          {/* <button
+            onClick={() => {
+              dispatch(setEditMuvekkil(muvekkil));
+              dispatch(setId(muvekkil._id));
+              history.push("/add-muvekkil");
+            }}
+          >
+            Edit
+          </button> */}
+        </div>
       </div>
     </Wrapper>
   );
@@ -29,13 +33,21 @@ const Muvekkil = ({ muvekkil }) => {
 
 const Wrapper = styled.div`
   .muvekkil {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    border: 1px solid #ccc;
-    height: 200px;
-    width: 200px;
+    display: table;
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+    table-layout: fixed;
+  }
+  .table-row {
+    display: table-row;
+    width: 100%;
+  }
+  .table-cell {
+    display: table-cell;
+    border: 1px solid black;
+    padding: 10px;
+    width: 100px; /* set the width of cells */
   }
 `;
 
