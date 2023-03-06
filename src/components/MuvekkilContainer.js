@@ -1,8 +1,11 @@
-import React from "react";
+import { React, useEffect } from "react";
 import styled from "styled-components";
 import Muvekkil from "./Muvekkil";
+import { useDispatch, useSelector } from "react-redux";
+import { getMuvekkils } from "../features/muvekkil/muvekkilSlice";
 
 const MuvekkilContainer = ({ muvekkils }) => {
+  const dispatch = useDispatch();
   return (
     <Wrapper>
       <div className="table-container">
