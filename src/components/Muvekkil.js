@@ -1,9 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { setEditMuvekkil } from "../features/muvekkil/muvekkilSlice";
+import {
+  setEditMuvekkil,
+  setId,
+  deleteMuvekkil,
+} from "../features/muvekkil/muvekkilSlice";
 import { useDispatch } from "react-redux";
-import { setId } from "../features/muvekkil/muvekkilSlice";
 import { MdOutlineEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 const Muvekkil = ({ muvekkil }) => {
@@ -31,12 +34,21 @@ const Muvekkil = ({ muvekkil }) => {
             <button
               className="button"
               onClick={() => {
-                dispatch(setEditMuvekkil(muvekkil));
                 dispatch(setId(muvekkil._id));
+                dispatch(setEditMuvekkil(muvekkil));
                 history.push("/add-muvekkil");
               }}
             >
               <MdOutlineEditNote />
+            </button>
+            <button
+              className="button"
+              onClick={() => {
+                dispatch(setId(muvekkil._id));
+                dispatch(deleteMuvekkil(muvekkil));
+              }}
+            >
+              <AiFillDelete />
             </button>
           </div>
         </div>
@@ -57,9 +69,10 @@ const Wrapper = styled.div`
   }
 
   .button-container {
-    width: 20vh;
-
-    margin-left: 0.2em;
+    width: 15vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
   }
   .button {
     width: 40px;

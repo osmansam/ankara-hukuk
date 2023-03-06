@@ -1,6 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { createMuvekkilThunk, updateMuvekkilThunk } from "./muvekkilThunk";
+import {
+  createMuvekkilThunk,
+  updateMuvekkilThunk,
+  deleteMuvekkilThunk,
+} from "./muvekkilThunk";
 import { checkForUnauthorizedResponse } from "../../utils/axios";
 import axios from "axios";
 const initialState = {
@@ -37,6 +41,12 @@ export const updateMuvekkil = createAsyncThunk(
   "muvekkil/updateMuvekkil",
   async (muvekkil, thunkAPI) => {
     updateMuvekkilThunk(`muvekkils/${muvekkil.id}`, muvekkil, thunkAPI);
+  }
+);
+export const deleteMuvekkil = createAsyncThunk(
+  "muvekkil/deleteMuvekkil",
+  async (muvekkil, thunkAPI) => {
+    deleteMuvekkilThunk(`muvekkils/${muvekkil.id}`, muvekkil, thunkAPI);
   }
 );
 
@@ -104,6 +114,17 @@ const muvekkilSlice = createSlice({
         state.muvekkils = action.payload.muvekkils;
       })
       .addCase(getMuvekkils.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error(action.payload);
+      })
+      .addCase(deleteMuvekkil.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteMuvekkil.fulfilled, (state, action) => {
+        state.isLoading = false;
+        toast.success("Muvekkil Deleted Successfully");
+      })
+      .addCase(deleteMuvekkil.rejected, (state, action) => {
         state.isLoading = false;
         toast.error(action.payload);
       });
