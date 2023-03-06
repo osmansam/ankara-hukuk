@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import { setEditMuvekkil } from "../features/muvekkil/muvekkilSlice";
 import { useDispatch } from "react-redux";
 import { setId } from "../features/muvekkil/muvekkilSlice";
-
+import { MdOutlineEditNote } from "react-icons/md";
+import { AiFillDelete } from "react-icons/ai";
 const Muvekkil = ({ muvekkil }) => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Muvekkil = ({ muvekkil }) => {
           <div className="table-cell">{muvekkil.soyad}</div>
           <div className="table-cell">{muvekkil.tc}</div>
           <div className="table-cell">{muvekkil.telefon}</div>
+
           {/* <button
             onClick={() => {
               dispatch(setEditMuvekkil(muvekkil));
@@ -25,6 +27,18 @@ const Muvekkil = ({ muvekkil }) => {
           >
             Edit
           </button> */}
+          <div className="button-container">
+            <button
+              className="button"
+              onClick={() => {
+                dispatch(setEditMuvekkil(muvekkil));
+                dispatch(setId(muvekkil._id));
+                history.push("/add-muvekkil");
+              }}
+            >
+              <MdOutlineEditNote />
+            </button>
+          </div>
         </div>
       </div>
     </Wrapper>
@@ -33,21 +47,26 @@ const Muvekkil = ({ muvekkil }) => {
 
 const Wrapper = styled.div`
   .muvekkil {
-    display: table;
-    border-collapse: collapse;
-    width: 80%;
-    margin: 0 auto;
-    table-layout: fixed;
+    display: flex;
+    flex-direction: row;
   }
+
   .table-row {
-    display: table-row;
-    width: 100%;
+    display: flex;
+    flex-direction: row;
   }
-  .table-cell {
-    display: table-cell;
-    border: 1px solid black;
-    padding: 10px;
-    width: 100px; /* set the width of cells */
+
+  .button-container {
+    width: 20vh;
+
+    margin-left: 0.2em;
+  }
+  .button {
+    width: 40px;
+    height: 40px;
+    border-radius: 10%;
+    background-color: #f5f5f5;
+    font-size: 24px;
   }
 `;
 
