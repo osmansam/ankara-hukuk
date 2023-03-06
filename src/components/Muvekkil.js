@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import {
@@ -13,6 +13,9 @@ import { AiFillDelete } from "react-icons/ai";
 const Muvekkil = ({ muvekkil }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setId(muvekkil._id));
+  }, [dispatch, muvekkil]);
   return (
     <Wrapper>
       <div className="muvekkil">
@@ -21,6 +24,9 @@ const Muvekkil = ({ muvekkil }) => {
           <div className="table-cell">{muvekkil.soyad}</div>
           <div className="table-cell">{muvekkil.tc}</div>
           <div className="table-cell">{muvekkil.telefon}</div>
+          <div className="table-cell">{muvekkil.email}</div>
+          <div className="table-cell">{muvekkil.dosyaMahkemesi}</div>
+          <div className="table-cell">{muvekkil.dosyaNo}</div>
 
           {/* <button
             onClick={() => {
@@ -35,7 +41,7 @@ const Muvekkil = ({ muvekkil }) => {
             <button
               className="button"
               onClick={() => {
-                dispatch(setId(muvekkil._id));
+                // dispatch(setId(muvekkil._id));
                 dispatch(setEditMuvekkil(muvekkil));
                 history.push("/add-muvekkil");
               }}
@@ -46,7 +52,6 @@ const Muvekkil = ({ muvekkil }) => {
             <button
               className="button"
               onClick={async () => {
-                dispatch(setId(muvekkil._id));
                 await dispatch(deleteMuvekkil(muvekkil));
                 await dispatch(getMuvekkils());
               }}
