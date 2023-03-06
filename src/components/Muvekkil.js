@@ -42,6 +42,7 @@ const Muvekkil = ({ muvekkil }) => {
             >
               <MdOutlineEditNote />
             </button>
+            {/* after delete there will be are your sure message */}
             <button
               className="button"
               onClick={async () => {
