@@ -7,6 +7,7 @@ import AddLink from "./pages/AddLink";
 import AddMuvekkil from "./pages/AddMuvekkil";
 import Muvekkil from "./pages/Muvekkil";
 import Home from "./pages/Home";
+import News from "./pages/News";
 import Works from "./pages/Works";
 import About from "./pages/About";
 import OurTeam from "./pages/OurTeam";
@@ -46,6 +47,11 @@ function App() {
         <Route path="/about" exact>
           <Navbar />
           <About />
+          <Footer />
+        </Route>
+        <Route path="/news" exact>
+          <Navbar />
+          <News />
           <Footer />
         </Route>
         <Route path="/muvekkil" exact>
