@@ -21,3 +21,13 @@ export const updateMuvekkilThunk = async (url, muvekkil, thunkAPI) => {
     return checkForUnauthorizedResponse(error, thunkAPI);
   }
 };
+
+//Delete Muvekkil
+export const deleteMuvekkilThunk = async (url, muvekkil, thunkAPI) => {
+  try {
+    const resp = await axios.delete(`${baseURL}/${url}`, muvekkil);
+    return resp.data;
+  } catch (error) {
+    return checkForUnauthorizedResponse(error, thunkAPI);
+  }
+};
