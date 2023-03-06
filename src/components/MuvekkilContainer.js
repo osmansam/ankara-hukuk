@@ -14,6 +14,9 @@ const MuvekkilContainer = ({ muvekkils }) => {
           <div className="table-cell">Soyad</div>
           <div className="table-cell">Tc</div>
           <div className="table-cell">Telefon</div>
+          <div className="table-cell">Email</div>
+          <div className="table-cell">Mahkeme</div>
+          <div className="table-cell">Dosya No</div>
         </div>
         <div className="table">
           <div className="muvekkil">
@@ -46,7 +49,7 @@ const Wrapper = styled.div`
     display: table-cell;
     border: 1px solid black;
     padding: 10px;
-    width: 37vh;
+    width: 22vh;
     text-transform: capitalize;
   }
   .muvekkil {
