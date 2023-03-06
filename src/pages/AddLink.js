@@ -69,27 +69,27 @@ const AddLink = () => {
   }
   if (!isImage) {
     return (
-      <form
-        className="form file-form"
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-      >
-        <div className="form-row">
-          <label htmlFor="image" className="form-label">
-            Image
-          </label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </div>
+      <ImageForm>
+        <form
+          className="form file-form"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
+          <div className="form-row">
+            <h1>Upload Image</h1>
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </div>
 
-        <button type="submit" className="btn btn-block">
-          Submit
-        </button>
-      </form>
+          <button type="submit" className="btn btn-block">
+            Submit
+          </button>
+        </form>
+      </ImageForm>
     );
   }
   return (
@@ -124,5 +124,27 @@ const Wrapper = styled.section`
   width: 40vh;
   height: 200vh;
   margin: 10rem auto;
+`;
+const ImageForm = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 40vh;
+  }
+  button {
+    margin-top: 1rem;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+  }
 `;
 export default AddLink;
