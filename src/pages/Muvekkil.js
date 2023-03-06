@@ -13,6 +13,7 @@ const Muvekkil = () => {
   useEffect(() => {
     dispatch(getMuvekkils());
   }, [dispatch]);
+
   if (muvekkils) {
     return (
       <Wrapper>

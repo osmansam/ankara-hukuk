@@ -5,6 +5,7 @@ import {
   setEditMuvekkil,
   setId,
   deleteMuvekkil,
+  getMuvekkils,
 } from "../features/muvekkil/muvekkilSlice";
 import { useDispatch } from "react-redux";
 import { MdOutlineEditNote } from "react-icons/md";
@@ -43,9 +44,10 @@ const Muvekkil = ({ muvekkil }) => {
             </button>
             <button
               className="button"
-              onClick={() => {
+              onClick={async () => {
                 dispatch(setId(muvekkil._id));
-                dispatch(deleteMuvekkil(muvekkil));
+                await dispatch(deleteMuvekkil(muvekkil));
+                await dispatch(getMuvekkils());
               }}
             >
               <AiFillDelete />
