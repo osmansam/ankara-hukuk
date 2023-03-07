@@ -5,6 +5,7 @@ import AddInfo from "./pages/AddInfo";
 import AddLawyer from "./pages/AddLawyer";
 import AddLink from "./pages/AddLink";
 import AddMuvekkil from "./pages/AddMuvekkil";
+import AddHaber from "./pages/AddHaber";
 import Muvekkil from "./pages/Muvekkil";
 import Home from "./pages/Home";
 import News from "./pages/News";
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route path="/add-link" exact>
           <AddLink />
+        </Route>
+        <Route path="/add-haber" exact>
+          <AddHaber />
         </Route>
         <Route path="/add-muvekkil" exact>
           <AddMuvekkil />

@@ -37,6 +37,12 @@ const haberSlice = createSlice({
     clearForm: (state) => {
       return initialState;
     },
+    setImage: (state, { payload }) => {
+      state.image = payload;
+    },
+    setLoading: (state, { payload }) => {
+      state.isLoading = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -53,5 +59,6 @@ const haberSlice = createSlice({
   },
 });
 
-export const { handleChange, clearForm } = haberSlice.actions;
+export const { handleChange, clearForm, setImage, setLoading } =
+  haberSlice.actions;
 export default haberSlice.reducer;
