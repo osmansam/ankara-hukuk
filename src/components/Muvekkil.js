@@ -24,7 +24,7 @@ const Muvekkil = ({ muvekkil }) => {
           <div className="table-cell">{muvekkil.soyad}</div>
           <div className="table-cell">{muvekkil.tc}</div>
           <div className="table-cell">{muvekkil.telefon}</div>
-          <div className="table-cell">{muvekkil.email}</div>
+          <div className="table-cell email">{muvekkil.email}</div>
           <div className="table-cell">{muvekkil.dosyaMahkemesi}</div>
           <div className="table-cell">{muvekkil.dosyaNo}</div>
 
@@ -88,6 +88,9 @@ const Wrapper = styled.div`
     border-radius: 10%;
     background-color: #f5f5f5;
     font-size: 24px;
+  }
+  .email {
+    text-transform: lowercase;
   }
 `;
 

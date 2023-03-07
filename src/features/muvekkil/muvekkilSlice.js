@@ -46,8 +46,6 @@ export const updateMuvekkil = createAsyncThunk(
 export const deleteMuvekkil = createAsyncThunk(
   "muvekkil/deleteMuvekkil",
   async (muvekkil, thunkAPI) => {
-    console.log(muvekkil._id, "muvekkil._id");
-    console.log(muvekkil.ad, "muvekkil.ad");
     deleteMuvekkilThunk(`muvekkils/${muvekkil._id}`, muvekkil, thunkAPI);
   }
 );

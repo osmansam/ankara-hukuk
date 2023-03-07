@@ -117,27 +117,27 @@ const AddLawyer = () => {
   }
   if (!isImage) {
     return (
-      <form
-        className="form file-form"
-        onSubmit={handleSubmit}
-        encType="multipart/form-data"
-      >
-        <div className="form-row">
-          <label htmlFor="image" className="form-label">
-            Image
-          </label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </div>
+      <ImageForm>
+        <form
+          className="form file-form"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
+          <h1>Upload Image</h1>
+          <div className="form-row">
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </div>
 
-        <button type="submit" className="btn btn-block">
-          Submit
-        </button>
-      </form>
+          <button type="submit" className="btn btn-block">
+            Submit
+          </button>
+        </form>
+      </ImageForm>
     );
   }
   return (
@@ -234,15 +234,59 @@ const AddLawyer = () => {
           handleChange={handleLawyerChange}
           labelText="Expertise (English)"
         />
-        <button type="submit">Submit</button>
+        <button type="submit" className="btn btn-block">
+          Submit
+        </button>
       </form>
     </Wrapper>
   );
 };
 const Wrapper = styled.div`
-  width: 40vh;
-  height: 200vh;
+  width: 100%;
+
   margin: 10rem auto;
+
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    justify-items: center;
+    align-items: center;
+    .form-row:nth-child(2),
+    .form-row:nth-child(3) {
+      &:first-child {
+        visibility: hidden;
+      }
+    }
+    button {
+      grid-column: 2 / 3;
+      width: 40%;
+      height: 2rem;
+    }
+  }
+`;
+
+const ImageForm = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 40vh;
+  }
+  button {
+    margin-top: 1rem;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+  }
 `;
 
 export default AddLawyer;
