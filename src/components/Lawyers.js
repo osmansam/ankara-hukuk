@@ -64,8 +64,8 @@ const Lawyers = ({ props }) => {
                     </span>{" "}
                     {language === "en" ? expertiseEn : expertiseTr}
                   </p>
-                  <p>
-                    <span className="bold-lawyer">e-mail:</span> {email}
+                  <p className="email">
+                    <span className="bold-lawyer ">e-mail:</span> {email}
                   </p>
                 </div>
               </div>
@@ -94,6 +94,7 @@ const Wrapper = styled.div`
   }
   .bold-lawyer {
     font-weight: 500;
+    text-transform: capitalize;
   }
   .lawyer p {
     font-size: 0.7em;
@@ -106,6 +107,9 @@ const Wrapper = styled.div`
     font-size: 0.7rem;
     margin-bottom: 1em;
     margin-top: 1em;
+  }
+  .email {
+    text-transform: lowercase;
   }
 `;
 export default Lawyers;
