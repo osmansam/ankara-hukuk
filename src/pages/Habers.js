@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getAllHabers } from "../features/haber/haberSlice";
+import HaberContainer from "../components/HaberContainer";
 import styled from "styled-components";
 
 const Habers = () => {
@@ -13,4 +14,17 @@ const Habers = () => {
   useEffect(() => {
     dispatch(getAllHabers());
   }, []);
+
+  return (
+    <Wrapper>
+      <div className="habers">
+        <div className="habers-container">
+          <HaberContainer habers={habers} />
+        </div>
+      </div>
+    </Wrapper>
+  );
 };
+const Wrapper = styled.div``;
+
+export default Habers;
