@@ -5,6 +5,7 @@ import infoSlice from "./features/info/infoSlice";
 import lawyerSlice from "./features/lawyer/lawyerSlice";
 import linkSlice from "./features/link/linkSlice";
 import muvekkilSlice from "./features/muvekkil/muvekkilSlice";
+import haberSlice from "./features/haber/haberSlice";
 export const store = configureStore({
   reducer: {
     user: userSlice,
@@ -13,5 +14,6 @@ export const store = configureStore({
     lawyer: lawyerSlice,
     link: linkSlice,
     muvekkil: muvekkilSlice,
+    haber: haberSlice,
   },
 });
