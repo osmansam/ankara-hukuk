@@ -2,7 +2,7 @@ import { React, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { getBaslik } from "../features/haber/haberSlice";
+import { getBaslik, setBaslikHaberId } from "../features/haber/haberSlice";
 import styled from "styled-components";
 
 const HaberBaslik = () => {
@@ -11,7 +11,7 @@ const HaberBaslik = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { language } = useSelector((store) => store.bar);
-  const { basliks } = useSelector((store) => store.haber);
+  const { basliks, baslikHaberId } = useSelector((store) => store.haber);
   useEffect(() => {
     dispatch(getBaslik(id));
   }, []);
@@ -22,11 +22,11 @@ const HaberBaslik = () => {
   if (basliks !== null && basliks !== undefined && basliks !== []) {
     return (
       <Wrapper>
-        <div className="habers">
-          <div className="habers-container">
+        <div className="basliks">
+          <div className="baslik-container">
             {haberBaslik?.map((baslik, index) => (
               <div key={index} className="haber">
-                <div className="haber-info">
+                <div className="baslik-info">
                   <h3>{language === "tr" ? baslik.titleTr : baslik.titleEn}</h3>
                   <p>
                     {language === "tr" ? baslik.contentTr : baslik.contentEn}
@@ -35,6 +35,14 @@ const HaberBaslik = () => {
               </div>
             ))}
           </div>
+          <button
+            onClick={() => {
+              dispatch(setBaslikHaberId(id));
+              history.push("/add-haber");
+            }}
+          >
+            Add Baslik
+          </button>
         </div>
       </Wrapper>
     );

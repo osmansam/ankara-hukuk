@@ -15,6 +15,7 @@ const initialState = {
   image: "",
   date: "",
   basliks: [],
+  baslikHaberId: "",
 };
 //create haber
 export const createHaber = createAsyncThunk(
@@ -73,6 +74,9 @@ const haberSlice = createSlice({
     setLoading: (state, { payload }) => {
       state.isLoading = payload;
     },
+    setBaslikHaberId: (state, { payload }) => {
+      state.baslikHaberId = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -119,6 +123,11 @@ const haberSlice = createSlice({
   },
 });
 
-export const { handleChange, clearForm, setImage, setLoading } =
-  haberSlice.actions;
+export const {
+  handleChange,
+  clearForm,
+  setImage,
+  setLoading,
+  setBaslikHaberId,
+} = haberSlice.actions;
 export default haberSlice.reducer;

@@ -11,6 +11,9 @@ import {
   clearForm,
   setImage,
   setLoading,
+  createBaslik,
+  setBaslikHaberId,
+  getBaslik,
 } from "../features/haber/haberSlice";
 import styled from "styled-components";
 
@@ -20,8 +23,16 @@ const AddHaber = () => {
   const [photo, setPhoto] = useState(null);
   const [isImage, setIsImage] = useState(false);
   const { language } = useSelector((store) => store.bar);
-  const { isLoading, titleTr, titleEn, contentTr, contentEn, image, date } =
-    useSelector((store) => store.haber);
+  const {
+    isLoading,
+    titleTr,
+    titleEn,
+    contentTr,
+    contentEn,
+    image,
+    date,
+    baslikHaberId,
+  } = useSelector((store) => store.haber);
 
   const handleFormChange = (e) => {
     const name = e.target.name;
@@ -33,7 +44,9 @@ const AddHaber = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (isImage) {
+    if (isImage && baslikHaberId === "") {
+      console.log(isImage);
+      console.log(baslikHaberId, "baslikHaberId");
       if (!titleTr || !contentTr) {
         toast.error("Please fill titleTr and contentTr");
         return;
@@ -41,6 +54,20 @@ const AddHaber = () => {
       dispatch(createHaber({ titleTr, titleEn, contentTr, contentEn, image }));
       dispatch(clearForm());
       setIsImage(false);
+    } else if (isImage && baslikHaberId !== "") {
+      if (!titleTr || !contentTr) {
+        toast.error("Please fill titleTr and contentTr");
+        return;
+      }
+      const haberId = baslikHaberId;
+      dispatch(
+        createBaslik({ titleTr, titleEn, contentTr, contentEn, image, haberId })
+      );
+      dispatch(clearForm());
+      setIsImage(false);
+      dispatch(setBaslikHaberId(""));
+      await dispatch(getBaslik(haberId));
+      history.push(`/habers/baslik/${haberId}`);
     } else {
       dispatch(setLoading(true));
       if (photo) {
@@ -99,6 +126,7 @@ const AddHaber = () => {
   }
   return (
     <Wrapper>
+      {baslikHaberId !== "" ? <h1>Add Baslik</h1> : <h1>Add Haber</h1>}
       <form onSubmit={handleSubmit}>
         <FormRow
           type="text"
