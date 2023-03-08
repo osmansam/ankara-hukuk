@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import { checkForUnauthorizedResponse } from "../../utils/axios";
+import { getBaslikThunk } from "./haberThunk";
 import axios from "axios";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   contentEn: "",
   image: "",
   date: "",
+  basliks: [],
 };
 //create haber
 export const createHaber = createAsyncThunk(
@@ -38,6 +40,22 @@ export const getAllHabers = createAsyncThunk(
     }
   }
 );
+
+//create baslik
+export const createBaslik = createAsyncThunk(
+  "haber/createBaslik",
+  async (baslik, thunkAPI) => {
+    try {
+      const resp = await axios.post(`api/v1/habers/baslik`, baslik);
+      return resp.data;
+    } catch (error) {
+      return checkForUnauthorizedResponse(error, thunkAPI);
+    }
+  }
+);
+
+//get  baslik
+export const getBaslik = createAsyncThunk("haber/getBaslik", getBaslikThunk);
 
 const haberSlice = createSlice({
   name: "haber",
@@ -76,6 +94,26 @@ const haberSlice = createSlice({
         state.habers = payload.habers;
       })
       .addCase(getAllHabers.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(createBaslik.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(createBaslik.fulfilled, (state, action) => {
+        state.isLoading = false;
+        toast.success("Başlık başarıyla oluşturuldu.");
+      })
+      .addCase(createBaslik.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(getBaslik.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getBaslik.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.basliks = payload.baslik;
+      })
+      .addCase(getBaslik.rejected, (state) => {
         state.isLoading = false;
       });
   },

@@ -8,7 +8,7 @@ const Haber = ({ haber }) => {
   const { image, titleTr, titleEn, textTr, textEn, date } = haber;
   const { language } = useSelector((store) => store.bar);
   const handleHaberClick = () => {
-    history.push(`/haber/${haber._id}`);
+    history.push(`/habers/baslik/${haber._id}`);
   };
   return (
     <Wrapper>
