@@ -5,7 +5,7 @@ import axios from "axios";
 
 const initialState = {
   isLoading: false,
-  haberler: [],
+  habers: [],
   haber: {},
   titleTr: "",
   titleEn: "",
@@ -23,6 +23,18 @@ export const createHaber = createAsyncThunk(
       return resp.data;
     } catch (error) {
       return checkForUnauthorizedResponse(error, thunkAPI);
+    }
+  }
+);
+//get all habers
+export const getAllHabers = createAsyncThunk(
+  "haber/getAllHabers",
+  async (type, thunkAPI) => {
+    try {
+      const resp = await axios.get(`api/v1/habers/`);
+      return resp.data;
+    } catch (error) {
+      console.log(error);
     }
   }
 );
@@ -54,6 +66,16 @@ const haberSlice = createSlice({
         toast.success("Haber başarıyla oluşturuldu.");
       })
       .addCase(createHaber.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(getAllHabers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllHabers.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.habers = payload.habers;
+      })
+      .addCase(getAllHabers.rejected, (state) => {
         state.isLoading = false;
       });
   },
