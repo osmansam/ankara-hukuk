@@ -66,13 +66,14 @@ const Haber = () => {
 
 const Wrapper = styled.div`
   .haber {
-    width: 100%;
+    width: 90%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 3rem;
-    margin-top: 3rem;
+    margin-top: 5rem;
+    margin-left: 3rem;
   }
   .haber-title {
     font-size: 2rem;
