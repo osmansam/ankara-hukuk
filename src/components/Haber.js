@@ -13,7 +13,7 @@ const Haber = ({ haber }) => {
     history.push(`/habers/baslik/${haber._id}`);
   };
   const handleUserClick = () => {
-    history.push(`/haber`);
+    history.push(`/haber/${haber._id}`);
   };
   return (
     <Wrapper>

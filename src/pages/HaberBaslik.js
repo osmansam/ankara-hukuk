@@ -43,6 +43,13 @@ const HaberBaslik = () => {
           >
             Add Baslik
           </button>
+          <button
+            onClick={() => {
+              history.push(`/haber/${id}`);
+            }}
+          >
+            User Eye
+          </button>
         </div>
       </Wrapper>
     );
