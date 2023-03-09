@@ -1,10 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { getAllHabersThunk } from "./searchThunk";
 import axios from "axios";
 
 const initialState = {
   isLoading: false,
   page: 1,
+  habers: [],
   search: "",
   searchStatus: "all",
   searchType: "all",
@@ -18,21 +20,18 @@ const initialState = {
 
 //get all habers
 export const getAllHabers = createAsyncThunk(
-  "haber/getAllHabers",
-  async (type, thunkAPI) => {
-    try {
-      const resp = await axios.get(`api/v1/habers/`);
-      return resp.data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  "search/getAllHabers",
+  getAllHabersThunk
 );
 
 const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {},
+  reducers: {
+    changePage: (state, { payload }) => {
+      state.page = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getAllHabers.pending, (state, action) => {
@@ -40,6 +39,7 @@ const searchSlice = createSlice({
       })
       .addCase(getAllHabers.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.habers = payload.habers;
         state.totalHabers = payload.totalHabers;
         state.numberOfPages = payload.numOfPages;
       })
@@ -48,6 +48,6 @@ const searchSlice = createSlice({
       });
   },
 });
-export const {} = searchSlice.actions;
+export const { changePage } = searchSlice.actions;
 
 export default searchSlice.reducer;
