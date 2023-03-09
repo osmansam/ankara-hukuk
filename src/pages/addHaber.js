@@ -30,6 +30,8 @@ const AddHaber = () => {
     contentTr,
     contentEn,
     image,
+    imageWidth,
+    imageHeight,
     date,
     baslikHaberId,
   } = useSelector((store) => store.haber);
@@ -55,13 +57,22 @@ const AddHaber = () => {
       dispatch(clearForm());
       setIsImage(false);
     } else if (isImage && baslikHaberId !== "") {
-      if (!titleTr || !contentTr) {
-        toast.error("Please fill titleTr and contentTr");
+      if (!contentTr) {
+        toast.error("Please fill contentTr");
         return;
       }
       const haberId = baslikHaberId;
       dispatch(
-        createBaslik({ titleTr, titleEn, contentTr, contentEn, image, haberId })
+        createBaslik({
+          titleTr,
+          titleEn,
+          contentTr,
+          contentEn,
+          image,
+          imageWidth,
+          imageHeight,
+          haberId,
+        })
       );
       dispatch(clearForm());
       setIsImage(false);
@@ -116,6 +127,20 @@ const AddHaber = () => {
               onChange={handleImageChange}
             />
           </div>
+          <FormRow
+            type="text"
+            name="imageWidth"
+            value={imageWidth}
+            handleChange={handleFormChange}
+            labelText="Image Width"
+          />
+          <FormRow
+            type="text"
+            name="imageHeight"
+            value={imageHeight}
+            handleChange={handleFormChange}
+            labelText="Image Height"
+          />
 
           <button type="submit" className="btn btn-block">
             Submit
@@ -156,6 +181,7 @@ const AddHaber = () => {
           handleChange={handleFormChange}
           labelText="Content (EN)"
         />
+
         <div className="button-container">
           <button type="submit" className="btn btn-block">
             Submit

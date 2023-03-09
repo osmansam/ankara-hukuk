@@ -13,18 +13,27 @@ const Haber = ({ haber }) => {
     history.push(`/habers/baslik/${haber._id}`);
   };
   const handleUserClick = () => {
-    history.push(`/haber`);
+    history.push(`/haber/${haber._id}`);
   };
   return (
     <Wrapper>
-      <div
-        className="haber"
-        onClick={user.role === "admin" ? handleHaberClick : handleUserClick}
-      >
-        <div className="haber-info">
-          <h3>{language === "tr" ? titleTr : titleEn}</h3>
-          <p>{language === "tr" ? contentTr : contentEn}</p>
+      <div className="border">
+        <div
+          className="haber"
+          onClick={user.role === "admin" ? handleHaberClick : {}}
+        >
+          <div className="haber-info">
+            <h2>{language === "tr" ? titleTr : titleEn}</h2>
+            <p className="content">
+              {language === "tr"
+                ? `${contentTr.substring(0, 200)}...`
+                : contentEn}
+            </p>
+          </div>
         </div>
+        <button className="haber-btn" onClick={handleUserClick}>
+          Devami
+        </button>
       </div>
     </Wrapper>
   );
@@ -32,12 +41,24 @@ const Haber = ({ haber }) => {
 
 const Wrapper = styled.div`
   .haber {
-    width: 100%;
-    height: 12vh;
+    width: 90%;
+    height: 20vh;
     text-transform: capitalize;
-    border: 1px solid #ccc;
     margin-top: 1rem;
     margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .content {
+    font-size: 0.9rem;
+    text-indent: 1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+  .border {
+    display: flex; /* Add this */
+    justify-content: space-between; /* Add this */
+    border-bottom: 1px solid #ccc;
   }
   .haber-info {
     display: flex;
@@ -45,6 +66,15 @@ const Wrapper = styled.div`
     justify-content: space-evenly;
     height: 100%;
     margin-left: 3rem;
+  }
+  .haber-btn {
+    margin-right: 1rem;
+    margin-top: 6.5rem;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    color: black;
+    height: 2rem;
+    width: 4rem;
   }
 `;
 

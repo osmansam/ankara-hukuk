@@ -13,6 +13,8 @@ const initialState = {
   contentTr: "",
   contentEn: "",
   image: "",
+  imageWidth: "",
+  imageHeight: "",
   date: "",
   basliks: [],
   baslikHaberId: "",
@@ -90,16 +92,7 @@ const haberSlice = createSlice({
       .addCase(createHaber.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(getAllHabers.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getAllHabers.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.habers = payload.habers;
-      })
-      .addCase(getAllHabers.rejected, (state) => {
-        state.isLoading = false;
-      })
+
       .addCase(createBaslik.pending, (state) => {
         state.isLoading = true;
       })

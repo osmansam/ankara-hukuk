@@ -41,7 +41,7 @@ const Muvekkil = ({ muvekkil }) => {
             <button
               className="button"
               onClick={() => {
-                // dispatch(setId(muvekkil._id));
+                dispatch(setId(muvekkil._id));
                 dispatch(setEditMuvekkil(muvekkil));
                 history.push("/add-muvekkil");
               }}

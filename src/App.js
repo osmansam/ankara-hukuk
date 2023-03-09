@@ -7,6 +7,7 @@ import AddLink from "./pages/AddLink";
 import AddMuvekkil from "./pages/AddMuvekkil";
 import AddHaber from "./pages/AddHaber";
 import Habers from "./pages/Habers";
+import Haber from "./pages/Haber";
 import HaberBaslik from "./pages/HaberBaslik";
 import Muvekkil from "./pages/Muvekkil";
 import Home from "./pages/Home";
@@ -52,6 +53,11 @@ function App() {
         </Route>
         <Route path="/habers" exact>
           <Habers />
+        </Route>
+        <Route path="/haber/:id" exact>
+          <Navbar />
+          <Haber />
+          <Footer />
         </Route>
         <Route path="/habers/baslik/:id" exact>
           <HaberBaslik />
