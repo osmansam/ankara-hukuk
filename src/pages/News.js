@@ -1,6 +1,7 @@
 import { React, useEffect } from "react";
 import Section from "../components/Section";
 import HaberContainer from "../components/HaberContainer";
+import SearchContainer from "../components/SearchContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllHabers, changePage } from "../features/search/searchSlice";
 import styled from "styled-components";
@@ -14,6 +15,7 @@ const News = () => {
   const { habers } = useSelector((store) => store.search);
   useEffect(() => {
     dispatch(getAllHabers());
+    dispatch(changePage(1));
   }, []);
   const handlePageChange = (pageNumber) => {
     dispatch(changePage(pageNumber));
@@ -23,6 +25,9 @@ const News = () => {
     <Wrapper>
       <main>
         <Section props="news" />
+        <div className="search-container">
+          <SearchContainer />
+        </div>
         <div className="habers-container">
           <HaberContainer habers={habers} />
         </div>
@@ -49,9 +54,18 @@ const News = () => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
-  .habers-container {
+  .search-container {
     margin-top: 4rem;
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+    margin-left: 2rem;
+  }
+  .habers-container {
+    margin-left: 2rem;
+    margin-top: 2rem;
     width: 80%;
   }
   .page-container {

@@ -28,6 +28,12 @@ const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
+    clearFilters: (state) => {
+      return initialState;
+    },
+    handleFilters: (state, { payload: { name, value } }) => {
+      state[name] = value;
+    },
     changePage: (state, { payload }) => {
       state.page = payload;
     },
@@ -48,6 +54,6 @@ const searchSlice = createSlice({
       });
   },
 });
-export const { changePage } = searchSlice.actions;
+export const { changePage, clearFilters, handleFilters } = searchSlice.actions;
 
 export default searchSlice.reducer;
