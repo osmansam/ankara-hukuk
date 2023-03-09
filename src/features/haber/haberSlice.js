@@ -13,6 +13,8 @@ const initialState = {
   contentTr: "",
   contentEn: "",
   image: "",
+  imageWidth: "",
+  imageHeight: "",
   date: "",
   basliks: [],
   baslikHaberId: "",

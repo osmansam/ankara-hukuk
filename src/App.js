@@ -55,7 +55,9 @@ function App() {
           <Habers />
         </Route>
         <Route path="/haber/:id" exact>
+          <Navbar />
           <Haber />
+          <Footer />
         </Route>
         <Route path="/habers/baslik/:id" exact>
           <HaberBaslik />

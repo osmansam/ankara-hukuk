@@ -27,7 +27,9 @@ const HaberBaslik = () => {
             {haberBaslik?.map((baslik, index) => (
               <div key={index} className="haber">
                 <div className="baslik-info">
-                  <h3>{language === "tr" ? baslik.titleTr : baslik.titleEn}</h3>
+                  <h3 className="baslik-title">
+                    {language === "tr" ? baslik.titleTr : baslik.titleEn}
+                  </h3>
                   <p>
                     {language === "tr" ? baslik.contentTr : baslik.contentEn}
                   </p>
@@ -36,6 +38,7 @@ const HaberBaslik = () => {
             ))}
           </div>
           <button
+            className="btn btn-primary"
             onClick={() => {
               dispatch(setBaslikHaberId(id));
               history.push("/add-haber");
@@ -44,6 +47,7 @@ const HaberBaslik = () => {
             Add Baslik
           </button>
           <button
+            className="btn btn-primary"
             onClick={() => {
               history.push(`/haber/${id}`);
             }}
@@ -55,6 +59,31 @@ const HaberBaslik = () => {
     );
   }
 };
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  .basliks {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+  }
+  .baslik-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-top: 1rem;
+    width: 95%;
+  }
+  .baslik-title {
+    text-indent: 2rem;
+    margin-bottom: 1rem;
+  }
+  .haber {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid black;
+  }
+  button {
+    margin-left: 2rem;
+  }
+`;
 
 export default HaberBaslik;

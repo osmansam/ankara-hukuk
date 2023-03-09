@@ -20,7 +20,7 @@ const Haber = ({ haber }) => {
       <div className="border">
         <div
           className="haber"
-          onClick={user.role === "admin" ? handleHaberClick : handleUserClick}
+          onClick={user.role === "admin" ? handleHaberClick : {}}
         >
           <div className="haber-info">
             <h2>{language === "tr" ? titleTr : titleEn}</h2>
@@ -31,12 +31,7 @@ const Haber = ({ haber }) => {
             </p>
           </div>
         </div>
-        <button
-          className="haber-btn"
-          onClick={() => {
-            history.push(`/habers/${haber._id}`);
-          }}
-        >
+        <button className="haber-btn" onClick={handleUserClick}>
           Devami
         </button>
       </div>
