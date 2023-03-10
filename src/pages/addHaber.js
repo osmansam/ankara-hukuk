@@ -197,7 +197,7 @@ const AddHaber = () => {
 const Wrapper = styled.div`
   width: 100%;
 
-  margin: 10rem auto;
+  margin: 5rem auto;
 
   form {
     display: grid;
@@ -228,8 +228,7 @@ const ImageForm = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-
+  margin: 5rem auto;
   form {
     display: flex;
     flex-direction: column;

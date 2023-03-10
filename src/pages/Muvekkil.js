@@ -18,11 +18,34 @@ const Muvekkil = () => {
     return (
       <Wrapper>
         <MuvekkilContainer muvekkils={muvekkils} />
+        <button
+          className=" add-muvekkil"
+          onClick={() => {
+            history.push("/add-muvekkil");
+          }}
+        >
+          Muvekkil Ekle
+        </button>
       </Wrapper>
     );
   }
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .add-muvekkil {
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+  }
+`;
 
 export default Muvekkil;

@@ -16,6 +16,7 @@ const Muvekkil = ({ muvekkil }) => {
   useEffect(() => {
     dispatch(setId(muvekkil._id));
   }, [dispatch, muvekkil]);
+
   return (
     <Wrapper>
       <div className="muvekkil">
@@ -40,9 +41,9 @@ const Muvekkil = ({ muvekkil }) => {
           <div className="button-container">
             <button
               className="button"
-              onClick={() => {
+              onClick={async () => {
                 dispatch(setId(muvekkil._id));
-                dispatch(setEditMuvekkil(muvekkil));
+                await dispatch(setEditMuvekkil(muvekkil));
                 history.push("/add-muvekkil");
               }}
             >
@@ -54,6 +55,7 @@ const Muvekkil = ({ muvekkil }) => {
               onClick={async () => {
                 await dispatch(deleteMuvekkil(muvekkil));
                 await dispatch(getMuvekkils());
+                // history.push("/muvekkil");
               }}
             >
               <AiFillDelete />

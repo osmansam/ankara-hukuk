@@ -270,7 +270,7 @@ const ImageForm = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  margin: 5rem auto;
 
   form {
     display: flex;

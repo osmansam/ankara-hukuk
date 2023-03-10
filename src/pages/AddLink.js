@@ -123,14 +123,13 @@ const AddLink = () => {
 const Wrapper = styled.section`
   width: 40vh;
   height: 200vh;
-  margin: 10rem auto;
+  margin: 4rem auto;
 `;
 const ImageForm = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-
+  margin-top: 4rem;
   form {
     display: flex;
     flex-direction: column;
