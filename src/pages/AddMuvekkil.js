@@ -49,7 +49,7 @@ const AddMuvekkil = () => {
         toast.error("Please fill ad and soyad fields");
         return;
       }
-      dispatch(
+      await dispatch(
         createMuvekkil({
           ad,
           soyad,
@@ -70,12 +70,13 @@ const AddMuvekkil = () => {
         })
       );
       dispatch(clearMuvekkil());
+      history.push("./muvekkil");
     } else {
       if (!ad || !soyad) {
         toast.error("Please fill ad and soyad fields");
         return;
       }
-      dispatch(
+      await dispatch(
         updateMuvekkil({
           id,
           ad,
@@ -97,6 +98,7 @@ const AddMuvekkil = () => {
         })
       );
       dispatch(clearMuvekkil());
+      history.push("./muvekkil");
     }
   };
 
@@ -203,7 +205,8 @@ const AddMuvekkil = () => {
 };
 const Wrapper = styled.div`
   width: 100%;
-  margin: 10rem auto;
+  height: 100%;
+  margin: 5rem auto;
 
   form {
     display: grid;
@@ -215,6 +218,7 @@ const Wrapper = styled.div`
       grid-column: 2 / 3;
       width: 40%;
       height: 2rem;
+      margin-bottom: 3rem;
     }
   }
 `;
